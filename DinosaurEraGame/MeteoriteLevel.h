@@ -17,13 +17,12 @@ public:
 	bool incrementMeteoriteLevel();
 	void decrementMeteoriteLevel();
 	bool isGameOver() const;
+
+	void print() const;
+
 private:
 	friend class Test;
 	MeteoriteLevel();
-
-	void testSetClass(unsigned level, unsigned subLevel);
-	void print() const;
-	unsigned getSubLevel() const { return m_sublevel; }
 
 	static MeteoriteLevel* instance;
 	unsigned m_sublevel{0};

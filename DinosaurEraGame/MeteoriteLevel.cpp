@@ -46,12 +46,6 @@ bool MeteoriteLevel::isGameOver() const
     return isHit;
 }
 
-void MeteoriteLevel::testSetClass(unsigned level, unsigned subLevel)
-{
-	m_meteoriteLevel = level;
-	m_sublevel = subLevel;
-}
-
 void MeteoriteLevel::print() const
 {
 	cout << "Meteorite level = " << m_meteoriteLevel << " subLevel = " << m_sublevel << endl;

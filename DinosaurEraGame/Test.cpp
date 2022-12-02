@@ -12,7 +12,7 @@ void Test::testMeteoriteLevel()
 		cout << "SubLevel inc 0 -> 1: ";
 		metLevel->testSetClass(2, 0);
 		metLevel->incrementMeteoriteLevel();
-		if (metLevel->getSubLevel() == 1)
+		if (metLevel->testGetSubLevel() == 1)
 			cout << "true" << endl;
 		else
 			cout << "false" << endl;
@@ -22,7 +22,7 @@ void Test::testMeteoriteLevel()
 		cout << "Level inc sub 2 -> 0, met 2 -> 3: ";
 		metLevel->testSetClass(2, 2);
 		metLevel->incrementMeteoriteLevel();
-		if (metLevel->getSubLevel() == 0 && metLevel->getMeteoriteLevel() == 3)
+		if (metLevel->testGetSubLevel() == 0 && metLevel->getMeteoriteLevel() == 3)
 			cout << "true" << endl;
 		else
 			cout << "false" << endl;
@@ -32,7 +32,7 @@ void Test::testMeteoriteLevel()
 		cout << "SubLevel dec 2 -> 1: ";
 		metLevel->testSetClass(2, 2);
 		metLevel->decrementMeteoriteLevel();
-		if (metLevel->getSubLevel() == 1)
+		if (metLevel->testGetSubLevel() == 1)
 			cout << "true" << endl;
 		else
 			cout << "false" << endl;
@@ -42,7 +42,7 @@ void Test::testMeteoriteLevel()
 		cout << "Dec sub 0 -> 2, met 3 -> 1: ";
 		metLevel->testSetClass(3, 0);
 		metLevel->decrementMeteoriteLevel();
-		if (metLevel->getSubLevel() == 2 && metLevel->getMeteoriteLevel() == 2)
+		if (metLevel->testGetSubLevel() == 2 && metLevel->getMeteoriteLevel() == 2)
 			cout << "true" << endl;
 		else
 			cout << "false" << endl;
