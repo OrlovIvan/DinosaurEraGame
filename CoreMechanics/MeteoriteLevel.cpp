@@ -1,3 +1,4 @@
+#include "pch.h"
 #include <iostream>
 #include "MeteoriteLevel.h"
 
@@ -14,10 +15,10 @@ unsigned MeteoriteLevel::getMeteoriteLevel() const
 
 bool MeteoriteLevel::incrementMeteoriteLevel()
 {
+	m_sublevel++;
 	//подуровень метеорита. Как только достигнет 3, близость метеорита увеличивается
 	if (m_sublevel != SUB_LEVEL_MAX)
 	{
-		m_sublevel++;
 		return false;
 	}
 	m_sublevel = 0;

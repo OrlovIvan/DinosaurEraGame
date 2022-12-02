@@ -1,6 +1,7 @@
+#include "pch.h"
 #include "Person.h"
 
-inline void Person::damage()
+void Person::damage()
 {
 	m_health--;
 	if (m_health <= 0)
@@ -10,13 +11,13 @@ inline void Person::damage()
 	}
 }
 
-inline void Person::awake()
+void Person::awake()
 {
 	m_isUnconscious = false;
 	m_health = 1;
 }
 
-inline void Person::useMedKit()
+void Person::useMedKit()
 {
 	if (m_hasMedKit)
 	{
@@ -25,7 +26,7 @@ inline void Person::useMedKit()
 	}
 }
 
-inline void Person::eatFood()
+void Person::eatFood()
 {
 	if (m_health < MAX_HEALTH && food > 0)
 	{
@@ -34,7 +35,7 @@ inline void Person::eatFood()
 	}
 }
 
-inline void Person::takeFood()
+void Person::takeFood()
 {
 	food++;
 }

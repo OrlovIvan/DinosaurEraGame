@@ -13,8 +13,14 @@ enum class WeatherDamage
 class WeatherDesk
 {
 public:
-	WeatherDesk() = delete;
-	WeatherDesk(unsigned meteoriteLevel) : m_weatherDeskLevel(meteoriteLevel + 1) {}
+	static WeatherDesk* getInstance(unsigned meteoriteLevel = 2)
+	{
+		if (!instance)
+		{
+			instance = new WeatherDesk(meteoriteLevel);
+		}
+		return instance;
+	}
 
 	void putCardOnDesk(WeatherCard&);
 	void popCardFromDesk();
@@ -32,6 +38,11 @@ public:
 	void testFillTheDesk(std::vector<WeatherCard>& vec, int level);
 private:
 	friend class PlayTable;
+
+	WeatherDesk() = delete;
+	WeatherDesk(unsigned meteoriteLevel);
+
+	static WeatherDesk* instance;
 
 	void setDeskLevel(int meteoriteLevel);
 

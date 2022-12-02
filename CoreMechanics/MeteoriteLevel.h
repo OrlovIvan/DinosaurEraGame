@@ -22,7 +22,7 @@ public:
 
 private:
 	friend class Test;
-	MeteoriteLevel();
+	MeteoriteLevel() {};
 
 	static MeteoriteLevel* instance;
 	unsigned m_sublevel{0};

@@ -1,7 +1,6 @@
 #pragma once
 
-
-class Test
+class TestMech
 {
 public:
 	void testMeteoriteLevel();

@@ -32,8 +32,7 @@ class WeatherCardDeck
 public:
 	~WeatherCardDeck() {};
 
-	void shuffle();
-	void turn(int cardCount);
+	vector<WeatherCard> turn(unsigned meteoriteLevel, const vector<int>& weatherDeskCardCount);
 
 	void print();
 
@@ -46,14 +45,14 @@ public:
 		return classPtr;
 	}
 
-	const WeatherDesk& getWeatherDesk() const;
+	vector<WeatherCard> testGetAllCardsInDeck();
 	
 private:
 	WeatherCardDeck();
-
 	static WeatherCardDeck* classPtr;
 
-	void fillDeck();
+	void fillDeck(const vector<WeatherCard> newCards = vector<WeatherCard>(), const vector<int> weatherDeskCardCount = vector<int>());
+	void shuffle();
 	std::stack<WeatherCard> m_deck;
 };
 

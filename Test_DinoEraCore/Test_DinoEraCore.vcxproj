@@ -45,6 +45,9 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CoreMechanics\CoreMechanics.vcxproj">
+      <Project>{750592f2-cc4d-41a3-9c05-45dc63554edd}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\DinosaurEraGame\DinosaurEraGame.vcxproj">
       <Project>{2eb260ac-c6e9-4e80-961d-095fe7eedd60}</Project>
     </ProjectReference>
@@ -66,7 +69,7 @@
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>$(SolutionDir)\DinosaurEraGame;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\CoreMechanics;$(SolutionDir)\DinosaurEraGame;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>

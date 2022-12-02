@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "Doctor.h"
 
 void Doctor::useMedKit()

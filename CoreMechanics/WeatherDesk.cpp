@@ -1,8 +1,11 @@
+#include "pch.h"
 #include <iostream>
 #include <vector>
 #include "WeatherDesk.h"
 
-WeatherDesk::WeatherDesk()
+WeatherDesk* WeatherDesk::instance = nullptr;
+
+WeatherDesk::WeatherDesk(unsigned meteoriteLevel) : m_weatherDeskLevel(meteoriteLevel + 1)
 {
 	m_cardCountOnDesk.clear();
 	for (int i = 0; i <= WeatherCard::end; ++i)

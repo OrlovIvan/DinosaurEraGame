@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DinosaurEraGame", "Dinosaur
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Test_DinoEraCore", "Test_DinoEraCore\Test_DinoEraCore.vcxproj", "{41D79AA8-8FAB-48E5-B26F-A838DC26ADC9}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CoreMechanics", "CoreMechanics\CoreMechanics.vcxproj", "{750592F2-CC4D-41A3-9C05-45DC63554EDD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -31,6 +33,14 @@ Global
 		{41D79AA8-8FAB-48E5-B26F-A838DC26ADC9}.Release|x64.Build.0 = Release|x64
 		{41D79AA8-8FAB-48E5-B26F-A838DC26ADC9}.Release|x86.ActiveCfg = Release|Win32
 		{41D79AA8-8FAB-48E5-B26F-A838DC26ADC9}.Release|x86.Build.0 = Release|Win32
+		{750592F2-CC4D-41A3-9C05-45DC63554EDD}.Debug|x64.ActiveCfg = Debug|x64
+		{750592F2-CC4D-41A3-9C05-45DC63554EDD}.Debug|x64.Build.0 = Debug|x64
+		{750592F2-CC4D-41A3-9C05-45DC63554EDD}.Debug|x86.ActiveCfg = Debug|Win32
+		{750592F2-CC4D-41A3-9C05-45DC63554EDD}.Debug|x86.Build.0 = Debug|Win32
+		{750592F2-CC4D-41A3-9C05-45DC63554EDD}.Release|x64.ActiveCfg = Release|x64
+		{750592F2-CC4D-41A3-9C05-45DC63554EDD}.Release|x64.Build.0 = Release|x64
+		{750592F2-CC4D-41A3-9C05-45DC63554EDD}.Release|x86.ActiveCfg = Release|Win32
+		{750592F2-CC4D-41A3-9C05-45DC63554EDD}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

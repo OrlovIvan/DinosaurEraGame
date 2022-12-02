@@ -9,9 +9,11 @@ class PlayTable
 public:
 	PlayTable();
 	~PlayTable() = default;
+
+	void weatherTurn();
 private:
 	WeatherDesk* m_weatherDesk{};
-	WeatherDeck* m_weatherCardDeck{};
+	WeatherCardDeck* m_weatherCardDeck{};
 	MeteoriteLevel* m_meteoriteLevel{};
 };
 
