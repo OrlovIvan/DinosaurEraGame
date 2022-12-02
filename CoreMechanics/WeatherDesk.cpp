@@ -12,13 +12,25 @@ WeatherDesk::WeatherDesk(unsigned meteoriteLevel) : m_weatherDeskLevel(meteorite
 		m_cardCountOnDesk.push_back(0);
 }
 
-void WeatherDesk::putCardOnDesk(WeatherCard& card)
+void WeatherDesk::putCardsOnDesk(const vector<WeatherCard>& card)
+{
+	//firstly push new cards to weather desk
+	for (auto riter = card.rbegin(); riter != card.rend(); ++riter)
+	{
+		pushCardToDesk(*riter);
+	}
+
+	// then pop all old cards from it
+	popInvalidCardsFromDesk();
+}
+
+void WeatherDesk::pushCardToDesk(const WeatherCard& card)
 {
 	m_weatherDesk.push(card);
 	m_cardCountOnDesk[card]++;
 }
 
-void WeatherDesk::popCardFromDesk()
+void WeatherDesk::popInvalidCardsFromDesk()
 {
 	if (m_weatherDesk.size() > m_weatherDeskLevel)
 	{
@@ -104,8 +116,26 @@ void WeatherDesk::printCounts()
 void WeatherDesk::testFillTheDesk(vector<WeatherCard>& vec, int level)
 {
 	setDeskLevel(level);
-	for (auto card : vec)
+	putCardsOnDesk(vec);
+}
+
+vector<WeatherCard> WeatherDesk::testGetAllCardsInDesk()
+{
+	vector<WeatherCard> desk;
+
+	queue<WeatherCard> temp;
+	while (!m_weatherDesk.empty())
 	{
-		putCardOnDesk(card);
+		temp.push(m_weatherDesk.front());
+		desk.push_back(m_weatherDesk.front());
+		m_weatherDesk.pop();
 	}
+
+	while (!temp.empty())
+	{
+		m_weatherDesk.push(temp.front());
+		temp.pop();
+	}
+
+	return desk;
 }

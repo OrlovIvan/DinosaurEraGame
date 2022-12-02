@@ -33,17 +33,32 @@ TEST(TestWeatherCardDeck, TestDeckHandling)
 	WeatherCardDeck* weatherDeck = WeatherCardDeck::getInstance();
 
     vector<WeatherCard> deck = weatherDeck->testGetAllCardsInDeck();
+    vector<int> cardsCount;
+    for (int i = 0; i <= WeatherCard::end; ++i)
+        cardsCount.push_back(0);
+    for (auto card : deck)
+    {
+        cardsCount[card]++;
+    }
+    EXPECT_EQ(cardsCount[WeatherCard::Clean],CLEAN_COUNT);
+    EXPECT_EQ(cardsCount[WeatherCard::Clowdy], CLOWDY_COUNT);
+    EXPECT_EQ(cardsCount[WeatherCard::Lightning], LIGHTNING_COUNT);
+    EXPECT_EQ(cardsCount[WeatherCard::Meteorite], METEORITE_COUNT);
+    EXPECT_EQ(cardsCount[WeatherCard::OzonHole], OZON_COUNT);
+    EXPECT_EQ(cardsCount[WeatherCard::Thunder], THUNDER_COUNT);
+
     vector<WeatherCard> cardsInGame = weatherDeck->turn(2, vector<int>());
 
     vector<WeatherCard> deckAfterTurn = weatherDeck->testGetAllCardsInDeck();
     vector<WeatherCard> resultDeck;
-    for (auto card : cardsInGame)
+
+    for(auto card : cardsInGame)
         resultDeck.push_back(card);
     for (auto card : deckAfterTurn)
         resultDeck.push_back(card);
 
     EXPECT_EQ(resultDeck.size(), deck.size());
-    bool isEqual = false;
+    bool isEqual = true;
 
     for (int i = 0; i < resultDeck.size(); ++i)
     {
@@ -55,11 +70,48 @@ TEST(TestWeatherCardDeck, TestDeckHandling)
     }
     EXPECT_TRUE(isEqual);
 
+    // make the deck get empty and shuffle again. Then compare the initial deck and newly shuffled
+    resultDeck.clear();
+    cardsInGame = weatherDeck->turn(48, vector<int>());
+    cardsInGame = weatherDeck->turn(1, vector<int>());
+    deckAfterTurn = weatherDeck->testGetAllCardsInDeck();
+    for (auto card : cardsInGame)
+        resultDeck.push_back(card);
+    for (auto card : deckAfterTurn)
+        resultDeck.push_back(card);
+    EXPECT_EQ(resultDeck.size(), deck.size());
+
+    int initialCRC = 0;
+    int newDeckCRC = 0;
+    for (int i = 0; i < resultDeck.size(); ++i)
+    {
+        initialCRC += (deck[i]+1) * (i+1);
+        newDeckCRC += (resultDeck[i]+1) * (i+1);
+    }
+    EXPECT_TRUE(initialCRC != newDeckCRC);
+
     weatherDeck->print();
 }
 
 TEST(TestWeatherDesk, TestDeskHandling)
 {
+    WeatherDesk* desk = WeatherDesk::getInstance(5);
+    vector<WeatherCard> cardsToPush{ WeatherCard::Clean, WeatherCard::Clowdy, WeatherCard::Lightning, WeatherCard::Meteorite, WeatherCard::OzonHole };
+    desk->testFillTheDesk(cardsToPush, 5);
+    vector<WeatherCard> cardsOnDesk = desk->testGetAllCardsInDesk();
+    
+    EXPECT_EQ(cardsOnDesk.size(), cardsToPush.size());
+
+    bool isEqual = true;
+    for (int i = 0; i < cardsOnDesk.size(); ++i)
+    {
+        if (cardsOnDesk[i] != cardsToPush[cardsOnDesk.size()-i-1])
+        {
+            isEqual = false;
+            break;
+        }
+    }
+    EXPECT_TRUE(isEqual);
     /*cout << "***** Test weather damage *****" << endl;
 
     {

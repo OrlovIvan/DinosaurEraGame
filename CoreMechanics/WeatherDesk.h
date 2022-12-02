@@ -22,8 +22,7 @@ public:
 		return instance;
 	}
 
-	void putCardOnDesk(WeatherCard&);
-	void popCardFromDesk();
+	void putCardsOnDesk(const vector<WeatherCard>&);
 
 	int getCardCount(WeatherCard cardType) const
 	{
@@ -36,6 +35,7 @@ public:
 	void printCounts();
 
 	void testFillTheDesk(std::vector<WeatherCard>& vec, int level);
+	vector<WeatherCard> testGetAllCardsInDesk();
 private:
 	friend class PlayTable;
 
@@ -43,6 +43,9 @@ private:
 	WeatherDesk(unsigned meteoriteLevel);
 
 	static WeatherDesk* instance;
+
+	void pushCardToDesk(const WeatherCard& card);
+	void popInvalidCardsFromDesk();
 
 	void setDeskLevel(int meteoriteLevel);
 
