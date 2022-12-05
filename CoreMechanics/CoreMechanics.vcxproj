@@ -152,6 +152,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Astronomer.h" />
+    <ClInclude Include="DifficultyConfig.h" />
     <ClInclude Include="Doctor.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Historian.h" />
@@ -168,6 +169,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Astronomer.cpp" />
+    <ClCompile Include="DifficultyConfig.cpp" />
     <ClCompile Include="Doctor.cpp" />
     <ClCompile Include="Historian.cpp" />
     <ClCompile Include="Inventor.cpp" />

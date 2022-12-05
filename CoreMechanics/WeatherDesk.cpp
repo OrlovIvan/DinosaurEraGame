@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include "WeatherDesk.h"
+#include "DifficultyConfig.h"
 
 WeatherDesk* WeatherDesk::instance = nullptr;
 
@@ -15,7 +16,8 @@ WeatherDesk::WeatherDesk(unsigned meteoriteLevel) : m_weatherDeskLevel(meteorite
 void WeatherDesk::putCardsOnDesk(const vector<WeatherCard>& card)
 {
 	//firstly push new cards to weather desk
-	for (auto riter = card.rbegin(); riter != card.rend(); ++riter)
+	//for (auto riter = card.rbegin(); riter != card.rend(); ++riter)
+	for (auto riter = card.begin(); riter != card.end(); ++riter)
 	{
 		pushCardToDesk(*riter);
 	}
@@ -32,7 +34,7 @@ void WeatherDesk::pushCardToDesk(const WeatherCard& card)
 
 void WeatherDesk::popInvalidCardsFromDesk()
 {
-	if (m_weatherDesk.size() > m_weatherDeskLevel)
+	while (m_weatherDesk.size() > m_weatherDeskLevel)
 	{
 		m_cardCountOnDesk[m_weatherDesk.front()]--;
 		m_weatherDesk.pop();

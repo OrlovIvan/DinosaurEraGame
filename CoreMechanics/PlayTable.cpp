@@ -8,8 +8,9 @@
 #include "Historian.h"
 #include "WeatherDeck.h"
 
-PlayTable::PlayTable()
+PlayTable::PlayTable(DifficultyLevel diffLevel)
 {
+    m_difficulty = DifficultyConfig::getInstance(diffLevel);
 	m_meteoriteLevel = MeteoriteLevel::getInstance();
 	m_weatherDesk = WeatherDesk::getInstance(m_meteoriteLevel->getMeteoriteLevel());
 	m_weatherCardDeck = WeatherCardDeck::getInstance();

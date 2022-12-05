@@ -5,13 +5,6 @@
 
 using namespace std;
 
-#define CLEAN_COUNT (20)
-#define CLOWDY_COUNT (9)
-#define OZON_COUNT (4)
-#define LIGHTNING_COUNT (4)
-#define THUNDER_COUNT (10)
-#define METEORITE_COUNT (3)
-
 enum WeatherCard
 {
 	Clean = 0,
@@ -46,7 +39,10 @@ public:
 	}
 
 	vector<WeatherCard> testGetAllCardsInDeck();
-	
+	void testFill() { 
+		while (!m_deck.empty())
+			m_deck.pop();
+		fillDeck(); }
 private:
 	WeatherCardDeck();
 	static WeatherCardDeck* classPtr;

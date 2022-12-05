@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include "WeatherDeck.h"
+#include "DifficultyConfig.h"
 
 WeatherCardDeck* WeatherCardDeck::classPtr = nullptr;
 
@@ -68,6 +69,7 @@ void WeatherCardDeck::print()
 
 void WeatherCardDeck::fillDeck(const vector<WeatherCard> newCards, const vector<int> weatherDeskCardCount)
 {
+	DifficultyConfig* difficulty = DifficultyConfig::getInstance();
 	vector<int> cardsInGame(weatherDeskCardCount);
 	if (!cardsInGame.size()) // if the weatherDeskCardCount was empty (initial creation of the cardDeck), fill the vector by 0s
 	{
@@ -81,22 +83,22 @@ void WeatherCardDeck::fillDeck(const vector<WeatherCard> newCards, const vector<
 		cardsInGame[card]++;
 	}
 
-	for (int i = 0; i < CLEAN_COUNT - cardsInGame[WeatherCard::Clean]; ++i)
+	for (int i = 0; i < difficulty->getWeatherCardCountClean() - cardsInGame[WeatherCard::Clean]; ++i)
 		m_deck.push(WeatherCard::Clean);
 
-	for (int i = 0; i < CLOWDY_COUNT - cardsInGame[WeatherCard::Clowdy]; ++i)
+	for (int i = 0; i < difficulty->getWeatherCardCountClowdy() - cardsInGame[WeatherCard::Clowdy]; ++i)
 		m_deck.push(WeatherCard::Clowdy);
 
-	for (int i = 0; i < OZON_COUNT - cardsInGame[WeatherCard::OzonHole]; ++i)
+	for (int i = 0; i < difficulty->getWeatherCardCountOzon() - cardsInGame[WeatherCard::OzonHole]; ++i)
 		m_deck.push(WeatherCard::OzonHole);
 
-	for (int i = 0; i < LIGHTNING_COUNT - cardsInGame[WeatherCard::Lightning]; ++i)
+	for (int i = 0; i < difficulty->getWeatherCardCountLightning() - cardsInGame[WeatherCard::Lightning]; ++i)
 		m_deck.push(WeatherCard::Lightning);
 
-	for (int i = 0; i < THUNDER_COUNT - cardsInGame[WeatherCard::Thunder]; ++i)
+	for (int i = 0; i < difficulty->getWeatherCardCountThunder() - cardsInGame[WeatherCard::Thunder]; ++i)
 		m_deck.push(WeatherCard::Thunder);
 
-	for (int i = 0; i < METEORITE_COUNT - cardsInGame[WeatherCard::Meteorite]; ++i)
+	for (int i = 0; i < difficulty->getWeatherCardCountMeteorite() - cardsInGame[WeatherCard::Meteorite]; ++i)
 		m_deck.push(WeatherCard::Meteorite);
 }
 
