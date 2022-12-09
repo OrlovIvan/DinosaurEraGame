@@ -8,6 +8,8 @@ enum class WeatherDamage
 	Null = 0,
 	One,
 	All
+#pragma TODO("Ivan","For future getting multiple damage from multiple ozon holes and lightnings")
+	//,Multiple
 };
 
 class WeatherDesk

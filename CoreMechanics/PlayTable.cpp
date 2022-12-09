@@ -14,6 +14,21 @@ PlayTable::PlayTable(DifficultyLevel diffLevel)
 	m_meteoriteLevel = MeteoriteLevel::getInstance();
 	m_weatherDesk = WeatherDesk::getInstance(m_meteoriteLevel->getMeteoriteLevel());
 	m_weatherCardDeck = WeatherCardDeck::getInstance();
+
+    Inventor inventor;
+
+    // уровень метеоритной угрозы +
+    // уровень сложности +
+    // колода карт погоды +
+    // погодная доска +
+    // классы героев +-
+    // Карточки джунглей и генерация лабиринта
+    // классы монстров, механика боя с ними с учетом уровня сложности.
+    // более непредсказуемый генератор случайных чисел
+    // ход героев
+    // ход погоды
+    // определение, кто из героев получает повреждение
+    // графическая часть
 }
 
 void PlayTable::weatherTurn()

@@ -54,3 +54,23 @@ int Person::getHealth() const
 {
 	return m_health;
 }
+
+bool Person::stepUp()
+{
+	return false;
+}
+
+bool Person::stepDown()
+{
+	return false;
+}
+
+bool Person::stepRight()
+{
+	return false;
+}
+
+bool Person::stepLeft()
+{
+	return false;
+}

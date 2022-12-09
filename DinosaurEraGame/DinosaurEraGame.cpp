@@ -3,23 +3,30 @@
 
 #include <iostream>
 #include <PlayTable.h>
+#include <PlayTableSDL.h>
 
 using namespace std;
 
 int main()
 {
     cout << "Choose game difficulty: 1 - Easy, 2 - Medium, 3 - Hard" << endl;
-    int diff = 0;
+    /*int diff = 0;
     while(diff <= 0 || diff > 3)
         cin >> diff;
 
-    diff--; // correction to fit the DifficultyLevel enum members
+    diff--; // correction to fit the DifficultyLevel enum members*/
+    int diff = 1;
     DifficultyLevel level{DifficultyLevel::Easy};
     if (diff == static_cast<int>(DifficultyLevel::Medium))
         level = DifficultyLevel::Medium;
     else
         level = DifficultyLevel::Hard;
     PlayTable table(level);
+
+    drawTable();
+    
+
+	return 0;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
