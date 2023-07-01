@@ -6,7 +6,7 @@
 #include "Inventor.h"
 #include "Policeman.h"
 #include "Historian.h"
-#include "WeatherDeck.h"
+#include "WeatherCardDeck.h"
 
 PlayTable::PlayTable(DifficultyLevel diffLevel)
 {

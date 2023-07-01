@@ -21,7 +21,6 @@ public:
 	void print() const;
 
 private:
-	friend class Test;
 	MeteoriteLevel() {};
 
 	static MeteoriteLevel* instance;

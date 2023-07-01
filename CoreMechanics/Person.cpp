@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "Person.h"
 
-void Person::damage()
+void Person::hit()
 {
 	m_health--;
 	if (m_health <= 0)

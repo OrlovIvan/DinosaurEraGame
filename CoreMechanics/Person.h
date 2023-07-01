@@ -1,5 +1,8 @@
 #pragma once
 
+#include <vector>
+#include "Items.h"
+
 #define MAX_HEALTH (5)
 #define MAX_ACTIONS (4)
 
@@ -9,19 +12,28 @@ struct Position
 	int y{0};
 };
 
+enum Hands
+{
+	left = 0,
+	right
+};
+
 class Person
 {
 public:
 	Person() {}
 	virtual ~Person() {}
 
-	void damage();
+	void hit();
 	void awake();
 	virtual void useMedKit();
+
 	void eatFood();
 	void takeFood();
+
 	void takeMedKit();
 	void takeUmbrella();
+
 	int getHealth() const;
 
 	bool hasUmbrella() { return m_hasUmbrella; }
@@ -40,6 +52,7 @@ protected:
 	bool m_isUnconscious{false};
 	unsigned int food{ 0 };
 	unsigned m_actions{ MAX_ACTIONS };
+	std::vector<Item> m_inventory;
 
 	Position m_position;
 };

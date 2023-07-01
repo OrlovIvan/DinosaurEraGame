@@ -1,7 +1,7 @@
 #include "pch.h"
 #include <iostream>
 #include <vector>
-#include "WeatherDeck.h"
+#include "WeatherCardDeck.h"
 #include "DifficultyConfig.h"
 
 WeatherCardDeck* WeatherCardDeck::classPtr = nullptr;

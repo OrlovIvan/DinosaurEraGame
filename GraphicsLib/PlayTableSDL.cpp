@@ -2,6 +2,7 @@
 #include "PlayTableSDL.h"
 
 #include <SDL.h>
+#include <SDL_image.h>
 #include <stdio.h>
 #include <string>
 
@@ -40,7 +41,7 @@ SDL_Surface* gKeyPressSurfaces[KEY_PRESS_SURFACE_TOTAL];
 SDL_Surface* gCurrentSurface = NULL;
 
 //Loads individual image
-SDL_Surface* loadSurface(std::string path)
+/*SDL_Surface* loadSurface(std::string path)
 {
     //Load image at specified path
     SDL_Surface* loadedSurface = SDL_LoadBMP(path.c_str());
@@ -50,6 +51,32 @@ SDL_Surface* loadSurface(std::string path)
     }
 
     return loadedSurface;
+}*/
+SDL_Surface* loadSurface(std::string path)
+{
+    //The final optimized image
+    SDL_Surface* optimizedSurface = NULL;
+
+    //Load image at specified path
+    SDL_Surface* loadedSurface = IMG_Load(path.c_str());
+    if (loadedSurface == NULL)
+    {
+        printf("Unable to load image %s! SDL_image Error: %s\n", path.c_str(), IMG_GetError());
+    }
+    else
+    {
+        //Convert surface to screen format
+        optimizedSurface = SDL_ConvertSurface(loadedSurface, gScreenSurface->format, 0);
+        if (optimizedSurface == NULL)
+        {
+            printf("Unable to optimize image %s! SDL Error: %s\n", path.c_str(), SDL_GetError());
+        }
+
+        //Get rid of old loaded surface
+        SDL_FreeSurface(loadedSurface);
+    }
+
+    return optimizedSurface;
 }
 
 bool initSDL()
@@ -60,7 +87,7 @@ bool initSDL()
     //Initialize SDL
     if (SDL_Init(SDL_INIT_VIDEO) < 0)
     {
-        printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
+        printf("SDL could not initialize! SDL Error: %s\n", SDL_GetError());
         success = false;
     }
     else
@@ -69,16 +96,38 @@ bool initSDL()
         gWindow = SDL_CreateWindow("SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
         if (gWindow == NULL)
         {
-            printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
+            printf("Window could not be created! SDL Error: %s\n", SDL_GetError());
             success = false;
         }
         else
         {
-            //Get window surface
-            gScreenSurface = SDL_GetWindowSurface(gWindow);
+            //Initialize PNG loading
+            int imgFlags = IMG_INIT_PNG;
+            if (!(IMG_Init(imgFlags) & imgFlags))
+            {
+                printf("SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError());
+                success = false;
+            }
+            else
+            {
+                //Get window surface
+                gScreenSurface = SDL_GetWindowSurface(gWindow);
+            }
         }
     }
 
+    return success;
+}
+
+bool loadPNG()
+{
+    bool success = true;
+    gImageSurface = loadSurface("C:\\Git\\DinosaurEraGame\\Debug\\02_getting_an_image_on_the_screen\\hello.png");
+    if (gImageSurface == NULL)
+    {
+        printf("Failed to load default image!\n");
+        success = false;
+    }
     return success;
 }
 
@@ -154,7 +203,9 @@ void drawTable()
     else
     {
         //Load media
-        if (!loadMedia())
+        //if (!loadMedia())
+        if (!loadPNG())
+        
         {
             printf("Failed to load media!\n");
         }
