@@ -2,15 +2,12 @@
 
 #include <vector>
 #include "Items.h"
+#include "Position.h"
 
 #define MAX_HEALTH (5)
 #define MAX_ACTIONS (4)
 
-struct Position
-{
-	int x{0};
-	int y{0};
-};
+constexpr int MAX_INVENTORY_COUNT = 6;
 
 enum Hands
 {
@@ -21,7 +18,7 @@ enum Hands
 class Person
 {
 public:
-	Person() {}
+	Person();
 	virtual ~Person() {}
 
 	void hit();
@@ -31,7 +28,6 @@ public:
 	void eatFood();
 	void takeFood();
 
-	void takeMedKit();
 	void takeUmbrella();
 
 	int getHealth() const;
@@ -39,6 +35,7 @@ public:
 	bool hasUmbrella() { return m_hasUmbrella; }
 	virtual bool isThunderSafe() { return false; }
 	virtual int luck() { return 0; }
+	bool hasFreeSpaceInInventory();
 
 	bool stepUp();
 	bool stepDown();
@@ -53,6 +50,7 @@ protected:
 	unsigned int food{ 0 };
 	unsigned m_actions{ MAX_ACTIONS };
 	std::vector<Item> m_inventory;
+	
 
 	Position m_position;
 };

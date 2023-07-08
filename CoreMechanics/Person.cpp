@@ -1,6 +1,14 @@
 #include "pch.h"
 #include "Person.h"
 
+inline Person::Person()
+{
+	for (int i = 0;i < MAX_INVENTORY_COUNT;++i)
+	{
+		m_inventory.push_back(Item(ItemName::none));
+	}
+}
+
 void Person::hit()
 {
 	m_health--;
@@ -40,11 +48,6 @@ void Person::takeFood()
 	food++;
 }
 
-inline void Person::takeMedKit()
-{
-	m_hasMedKit = true;
-}
-
 void Person::takeUmbrella()
 {
 	m_hasUmbrella = true;
@@ -53,6 +56,16 @@ void Person::takeUmbrella()
 int Person::getHealth() const
 {
 	return m_health;
+}
+
+bool Person::hasFreeSpaceInInventory()
+{
+	for (auto item : m_inventory)
+	{
+		if (item.getItemName() == ItemName::none)
+			return true;
+	}
+	return false;
 }
 
 bool Person::stepUp()

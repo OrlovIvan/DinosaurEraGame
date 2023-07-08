@@ -158,11 +158,13 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="Historian.h" />
     <ClInclude Include="Inventor.h" />
+    <ClInclude Include="Items.h" />
     <ClInclude Include="MeteoriteLevel.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Person.h" />
     <ClInclude Include="PlayTable.h" />
     <ClInclude Include="Policeman.h" />
+    <ClInclude Include="Position.h" />
     <ClInclude Include="Test.h" />
     <ClInclude Include="Thief.h" />
     <ClInclude Include="WeatherCardDeck.h" />
