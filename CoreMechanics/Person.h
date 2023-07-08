@@ -6,6 +6,7 @@
 
 #define MAX_HEALTH (5)
 #define MAX_ACTIONS (4)
+#define COCCOON_PLACE (2)
 
 constexpr int MAX_INVENTORY_COUNT = 6;
 
@@ -22,8 +23,13 @@ public:
 	virtual ~Person() {}
 
 	void hit();
+	void getHit();
+	bool isUnconscious() const { return m_isUnconscious; };
 	void awake();
+
 	virtual void useMedKit();
+
+	bool takeItemToInventory(Item item);
 
 	void eatFood();
 	void takeFood();
@@ -32,7 +38,7 @@ public:
 
 	int getHealth() const;
 
-	bool hasUmbrella() { return m_hasUmbrella; }
+	bool hasUmbrellaInHand() const;
 	virtual bool isThunderSafe() { return false; }
 	virtual int luck() { return 0; }
 	bool hasFreeSpaceInInventory();
@@ -42,16 +48,18 @@ public:
 	bool stepRight();
 	bool stepLeft();
 
+	Position getPosition() const { return m_position; }
+
 protected:
+	int hasMedKit() const;
+	bool hasCoccoon() const;
+
 	unsigned int m_health{ MAX_HEALTH };
-	bool m_hasUmbrella{false};
-	bool m_hasMedKit{false};
 	bool m_isUnconscious{false};
 	unsigned int food{ 0 };
 	unsigned m_actions{ MAX_ACTIONS };
 	std::vector<Item> m_inventory;
 	
-
 	Position m_position;
 };
 

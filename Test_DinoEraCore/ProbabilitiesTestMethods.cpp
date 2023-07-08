@@ -1,7 +1,7 @@
 #include <iostream>
+#include "pch.h"
 #include <vector>
 #include "ProbabilitiesTestMethods.h"
-#include "WeatherCardDeck.h"
 #include "WeatherDesk.h"
 
 using namespace std;

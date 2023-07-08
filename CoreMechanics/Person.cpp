@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "Person.h"
 
-inline Person::Person()
+Person::Person()
 {
 	for (int i = 0;i < MAX_INVENTORY_COUNT;++i)
 	{
@@ -10,6 +10,11 @@ inline Person::Person()
 }
 
 void Person::hit()
+{
+	
+}
+
+void Person::getHit()
 {
 	m_health--;
 	if (m_health <= 0)
@@ -27,11 +32,46 @@ void Person::awake()
 
 void Person::useMedKit()
 {
-	if (m_hasMedKit)
+	int medKitIndex = hasMedKit();
+	if (medKitIndex != -1)
 	{
 		m_health = MAX_HEALTH;
-		m_hasMedKit = false;
+		m_inventory[medKitIndex] = Item(ItemName::none);
 	}
+}
+
+bool Person::takeItemToInventory(Item item)
+{
+	if (item.getItemName() == ItemName::umbrella ||
+		item.getItemName() == ItemName::branch || item.getItemName() == ItemName::bat || item.getItemName() == ItemName::gun)
+	{
+		if (m_inventory[0].getItemName() == ItemName::none)
+		{
+			m_inventory[0] = item;
+			return true;
+		}
+		else if (m_inventory[1].getItemName() == ItemName::none)
+		{
+			m_inventory[1] = item;
+			return true;
+		}
+	}
+
+	if (hasCoccoon())
+	{
+		if (hasFreeSpaceInInventory() != -1)
+		{
+			m_inventory[hasFreeSpaceInInventory()] = item;
+			return true;
+		}
+			
+	}
+	else
+	{
+		m_inventory[hasFreeSpaceInInventory()] = item;
+		return true;
+	}
+	return false;
 }
 
 void Person::eatFood()
@@ -50,7 +90,7 @@ void Person::takeFood()
 
 void Person::takeUmbrella()
 {
-	m_hasUmbrella = true;
+	
 }
 
 int Person::getHealth() const
@@ -58,14 +98,20 @@ int Person::getHealth() const
 	return m_health;
 }
 
+bool Person::hasUmbrellaInHand() const
+{
+	return m_inventory[0].getItemName() == ItemName::umbrella
+			|| m_inventory[1].getItemName() == ItemName::umbrella;
+}
+
 bool Person::hasFreeSpaceInInventory()
 {
-	for (auto item : m_inventory)
+	for (int i = 0; i < MAX_INVENTORY_COUNT; ++i)
 	{
-		if (item.getItemName() == ItemName::none)
-			return true;
+		if (m_inventory[i].getItemName() == ItemName::none)
+			return i;
 	}
-	return false;
+	return -1;
 }
 
 bool Person::stepUp()
@@ -86,4 +132,19 @@ bool Person::stepRight()
 bool Person::stepLeft()
 {
 	return false;
+}
+
+int Person::hasMedKit() const
+{
+	for (int i = 0; i < MAX_INVENTORY_COUNT; ++i)
+	{
+		if (m_inventory[i].getItemName() == ItemName::medKit)
+			return i;
+	}
+	return -1;
+}
+
+bool Person::hasCoccoon() const
+{
+	return m_inventory[COCCOON_PLACE].getItemName() == ItemName::coccoon;
 }

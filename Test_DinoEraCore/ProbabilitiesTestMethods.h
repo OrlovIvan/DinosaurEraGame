@@ -1,3 +1,4 @@
 #pragma once
+#include "WeatherCardDeck.h"
 
-void getProbability(const vector<WeatherCard>& deck, int cardsOnDesk);
+void getProbability(const std::vector<WeatherCard>& deck, int cardsOnDesk);

@@ -7,17 +7,56 @@
 #include "Test.h"
 #include "DifficultyConfig.h"
 #include "ProbabilitiesTestMethods.h"
+#include "Items.h"
+#include "Person.h"
+#include "Policeman.h"
 
 using namespace std;
 
 TEST(TestItem)
 {
+    Item item(ItemName::none);
+    EXPECT_TRUE(item.getItemName() == ItemName::none);
+}
+
+TEST(TestPersonClass, TestHealth)
+{
+    std::unique_ptr<Person> person(new Policeman());
+    
+    EXPECT_EQ(person->getHealth(), MAX_HEALTH);
+    person->getHit();
+    EXPECT_EQ(person->getHealth(), MAX_HEALTH-1);
+    person->getHit();
+    person->getHit();
+    person->getHit();
+    person->getHit();
+    EXPECT_EQ(person->getHealth(), 0);
+    EXPECT_TRUE(person->isUnconscious());
+    person->awake();
+    EXPECT_FALSE(person->isUnconscious());
+    EXPECT_EQ(person->getHealth(), 1);
+
+    person->useMedKit();
+    EXPECT_EQ(person->getHealth(), 1);
+    person->takeItemToInventory(Item(ItemName::medKit));
+    person->useMedKit();
+    EXPECT_EQ(person->getHealth(), MAX_HEALTH);
+
+    person->getHit();
+    person->useMedKit();
+    EXPECT_EQ(person->getHealth(), MAX_HEALTH-1);
 
 }
 
-TEST(TestPersonClass)
+TEST(TestPersonClass, TestPositioning)
 {
+    /*EXPECT_EQ(person->getPosition().x, 0);
+    EXPECT_EQ(person->getPosition().y, 0);
 
+    person->stepDown();
+    person->stepRight();
+    EXPECT_EQ(person->getPosition().x, 0);
+    EXPECT_EQ(person->getPosition().y, 0);*/
 }
 
 TEST(TestMeteoriteLevel, TestLevelHandling)
@@ -126,6 +165,7 @@ TEST(TestWeatherCardDeck, TestDeckHandling)
     deck.clear();
     deck = weatherDeck->testGetAllCardsInDeck();
 
+    /*
     cout << "Check probabilities? 0 - no, 1 - yes" << endl;
     int toCheck = 0;
     cin >> toCheck;
@@ -136,7 +176,7 @@ TEST(TestWeatherCardDeck, TestDeckHandling)
         getProbability(deck, 3);
         getProbability(deck, 4);
         getProbability(deck, 5);
-    }
+    }*/
 }
 
 

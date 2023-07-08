@@ -3,6 +3,10 @@
 
 void Doctor::useMedKit()
 {
-	//this->Person::useMedKit();
-	m_hasMedKit = true;
+	int medKitIndex = this->Person::hasMedKit();
+	if (medKitIndex != -1)
+	{
+		this->Person::useMedKit();
+		m_inventory[medKitIndex] = Item(ItemName::medKit);
+	}
 }
