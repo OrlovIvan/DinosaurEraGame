@@ -3,12 +3,14 @@
 #include <vector>
 #include "Items.h"
 #include "Position.h"
+#include "RandomGenerator.h"
 
 #define MAX_HEALTH (5)
 #define MAX_ACTIONS (4)
 #define COCCOON_PLACE (2)
 
 constexpr int MAX_INVENTORY_COUNT = 6;
+using namespace positions;
 
 enum Hands
 {
@@ -22,7 +24,7 @@ public:
 	Person();
 	virtual ~Person() {}
 
-	void hit();
+	virtual unsigned hit();
 	void getHit();
 	bool isUnconscious() const { return m_isUnconscious; };
 	void awake();
@@ -56,6 +58,7 @@ protected:
 
 	unsigned int m_health{ MAX_HEALTH };
 	bool m_isUnconscious{false};
+
 	unsigned int food{ 0 };
 	unsigned m_actions{ MAX_ACTIONS };
 	std::vector<Item> m_inventory;

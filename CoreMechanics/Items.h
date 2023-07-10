@@ -2,6 +2,8 @@
 
 #include "Position.h"
 
+using namespace positions;
+
 enum class ItemName
 {
 	none = -1,

@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Person.h"
 
+
 Person::Person()
 {
 	for (int i = 0;i < MAX_INVENTORY_COUNT;++i)
@@ -9,9 +10,10 @@ Person::Person()
 	}
 }
 
-void Person::hit()
+unsigned Person::hit()
 {
-	
+	//TODO: use RandomGenerator to get dices values, get weapons bonus in hands. Override in inherited classes to use character's bonuses
+	return 0;
 }
 
 void Person::getHit()
@@ -116,22 +118,46 @@ bool Person::hasFreeSpaceInInventory()
 
 bool Person::stepUp()
 {
-	return false;
+	m_position.y += 1;
+	if (m_position.y > positions::Max_Y)
+	{
+		m_position.y = positions::Max_Y;
+		return false;
+	}
+	return true;
 }
 
 bool Person::stepDown()
 {
-	return false;
+	m_position.y -= 1;
+	if (m_position.y < positions::Min_Y)
+	{
+		m_position.y = positions::Min_Y;
+		return false;
+	}
+	return true;
 }
 
 bool Person::stepRight()
 {
-	return false;
+	m_position.x += 1;
+	if (m_position.x > positions::Max_X)
+	{
+		m_position.x = positions::Max_X;
+		return false;
+	}
+	return true;
 }
 
 bool Person::stepLeft()
 {
-	return false;
+	m_position.x -= 1;
+	if (m_position.x < positions::Min_X)
+	{
+		m_position.x = positions::Min_X;
+		return false;
+	}
+	return true;
 }
 
 int Person::hasMedKit() const

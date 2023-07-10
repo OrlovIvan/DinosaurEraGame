@@ -10,6 +10,7 @@
 #include "Items.h"
 #include "Person.h"
 #include "Policeman.h"
+#include "RandomGenerator.h"
 
 using namespace std;
 
@@ -17,6 +18,21 @@ TEST(TestItem)
 {
     Item item(ItemName::none);
     EXPECT_TRUE(item.getItemName() == ItemName::none);
+}
+
+TEST(TestRandomGenerator, TestDices)
+{
+    auto dices = RandomGenerator::getInstance();
+    auto dice1 = dices->getFirstDiceValue();
+    auto dice2 = dices->getSecondDiceValue();
+    EXPECT_TRUE(dices->getFirstDiceValue() > 0 && dices->getFirstDiceValue() <= 6);
+    EXPECT_TRUE(dices->getSecondDiceValue() > 0 && dices->getSecondDiceValue() <= 6);
+    dices->makeRandomValues();
+    EXPECT_TRUE(dices->getFirstDiceValue() > 0 && dices->getFirstDiceValue() <= 6);
+    EXPECT_TRUE(dices->getSecondDiceValue() > 0 && dices->getSecondDiceValue() <= 6);
+
+    EXPECT_TRUE(dice1 != dices->getFirstDiceValue());
+    EXPECT_TRUE(dice2 != dices->getSecondDiceValue());
 }
 
 TEST(TestPersonClass, TestHealth)
@@ -45,18 +61,64 @@ TEST(TestPersonClass, TestHealth)
     person->getHit();
     person->useMedKit();
     EXPECT_EQ(person->getHealth(), MAX_HEALTH-1);
-
 }
 
 TEST(TestPersonClass, TestPositioning)
 {
-    /*EXPECT_EQ(person->getPosition().x, 0);
+    std::unique_ptr<Person> person(new Policeman());
+
+    EXPECT_EQ(person->getPosition().x, 0);
     EXPECT_EQ(person->getPosition().y, 0);
 
-    person->stepDown();
-    person->stepRight();
+    EXPECT_TRUE(person->stepDown());
+    EXPECT_TRUE(person->stepRight());
+    EXPECT_EQ(person->getPosition().x, 1);
+    EXPECT_EQ(person->getPosition().y, -1);
+
+    person->stepUp();
+    person->stepLeft();
     EXPECT_EQ(person->getPosition().x, 0);
-    EXPECT_EQ(person->getPosition().y, 0);*/
+    EXPECT_EQ(person->getPosition().y, 0);
+
+    for (int i = 0;i <= positions::Max_X;++i)
+    {
+        person->stepUp();
+        person->stepRight();
+    }
+    EXPECT_EQ(person->getPosition().x, Max_X);
+    EXPECT_EQ(person->getPosition().y, Max_Y);
+    EXPECT_FALSE(person->stepUp());
+    EXPECT_FALSE(person->stepRight());
+    EXPECT_EQ(person->getPosition().x, Max_X);
+    EXPECT_EQ(person->getPosition().y, Max_Y);
+
+    for (int i = 0;i <= positions::Max_X;++i)
+    {
+        person->stepDown();
+        person->stepLeft();
+    }
+    for (int i = 0;i <= -positions::Min_X;++i)
+    {
+        person->stepDown();
+        person->stepLeft();
+    }
+    EXPECT_EQ(person->getPosition().x, Min_X);
+    EXPECT_EQ(person->getPosition().y, Min_Y);
+    EXPECT_FALSE(person->stepDown());
+    EXPECT_FALSE(person->stepLeft());
+    EXPECT_EQ(person->getPosition().x, Min_X);
+    EXPECT_EQ(person->getPosition().y, Min_Y);
+}
+
+TEST(TestPersonClass, TestInventory)
+{
+    std::unique_ptr<Person> person(new Policeman);
+    person->takeItemToInventory(Item(ItemName::medKit));
+}
+
+TEST(TestPersonClass, TestWeapons)
+{
+
 }
 
 TEST(TestMeteoriteLevel, TestLevelHandling)

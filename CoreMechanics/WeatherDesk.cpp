@@ -17,9 +17,9 @@ void WeatherDesk::putCardsOnDesk(const vector<WeatherCard>& card)
 {
 	//firstly push new cards to weather desk
 	//for (auto riter = card.rbegin(); riter != card.rend(); ++riter)
-	for (auto riter = card.begin(); riter != card.end(); ++riter)
+	for (auto rIter = card.begin(); rIter != card.end(); ++rIter)
 	{
-		pushCardToDesk(*riter);
+		pushCardToDesk(*rIter);
 	}
 
 	// then pop all old cards from it
