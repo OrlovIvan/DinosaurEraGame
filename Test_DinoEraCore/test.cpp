@@ -10,7 +10,7 @@
 #include "Items.h"
 #include "Person.h"
 #include "Policeman.h"
-#include "RandomGenerator.h"
+#include "Dices.h"
 
 using namespace std;
 
@@ -22,17 +22,16 @@ TEST(TestItem)
 
 TEST(TestRandomGenerator, TestDices)
 {
-    auto dices = RandomGenerator::getInstance();
+    Dices* dices = Dices::getInstance();
+    
     auto dice1 = dices->getFirstDiceValue();
     auto dice2 = dices->getSecondDiceValue();
-    EXPECT_TRUE(dices->getFirstDiceValue() > 0 && dices->getFirstDiceValue() <= 6);
-    EXPECT_TRUE(dices->getSecondDiceValue() > 0 && dices->getSecondDiceValue() <= 6);
-    dices->makeRandomValues();
-    EXPECT_TRUE(dices->getFirstDiceValue() > 0 && dices->getFirstDiceValue() <= 6);
-    EXPECT_TRUE(dices->getSecondDiceValue() > 0 && dices->getSecondDiceValue() <= 6);
 
-    EXPECT_TRUE(dice1 != dices->getFirstDiceValue());
-    EXPECT_TRUE(dice2 != dices->getSecondDiceValue());
+    EXPECT_TRUE(dices->getFirstDiceValue() > 0 && dices->getFirstDiceValue() <= 6);
+    EXPECT_TRUE(dices->getSecondDiceValue() > 0 && dices->getSecondDiceValue() <= 6);
+    dices->tossDices();
+    EXPECT_TRUE(dices->getFirstDiceValue() > 0 && dices->getFirstDiceValue() <= 6);
+    EXPECT_TRUE(dices->getSecondDiceValue() > 0 && dices->getSecondDiceValue() <= 6);
 }
 
 TEST(TestPersonClass, TestHealth)

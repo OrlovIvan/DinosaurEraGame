@@ -1,16 +1,26 @@
 #include "pch.h"
 #include "RandomGenerator.h"
-#include <random>
 
-RandomGenerator* RandomGenerator::m_instance = nullptr;
+#include <boost/random/mersenne_twister.hpp>
+#include <boost/random/uniform_int_distribution.hpp>
+#include <boost/chrono/chrono.hpp>
 
-RandomGenerator::RandomGenerator()
+boost::random::mt19937 gen;
+
+unsigned RandomGenerator::getRandomValue(int min, int max)
 {
-	makeRandomValues();
-}
+    auto time1 = boost::chrono::system_clock::now();
+    
+    boost::random::uniform_int_distribution<> dist(min, max);
+    ::Sleep(1);
+    
+    boost::chrono::nanoseconds duration = boost::chrono::system_clock::now() - time1;
+    unsigned dummyRounds = duration.count()/100000;
 
-void RandomGenerator::makeRandomValues()
-{
-	m_firstDice = rand() % 6 + 1;
-	m_secondDice = rand() % 6 + 1;
+    while (dummyRounds--)
+    {
+        dist(gen);
+    }
+    
+    return dist(gen);
 }
