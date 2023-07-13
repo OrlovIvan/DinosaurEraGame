@@ -4,12 +4,11 @@
 #include "Items.h"
 #include "Position.h"
 #include "RandomGenerator.h"
+#include "Inventory.h"
 
 #define MAX_HEALTH (5)
 #define MAX_ACTIONS (4)
-#define COCCOON_PLACE (2)
 
-constexpr int MAX_INVENTORY_COUNT = 6;
 using namespace positions;
 
 enum Hands
@@ -29,21 +28,17 @@ public:
 	bool isUnconscious() const { return m_isUnconscious; };
 	void awake();
 
-	virtual void useMedKit();
+	virtual int useMedKit();
 
 	bool takeItemToInventory(Item item);
 
 	void eatFood();
-	void takeFood();
-
-	void takeUmbrella();
 
 	int getHealth() const;
 
 	bool hasUmbrellaInHand() const;
 	virtual bool isThunderSafe() { return false; }
 	virtual int luck() { return 0; }
-	bool hasFreeSpaceInInventory();
 
 	bool stepUp();
 	bool stepDown();
@@ -53,15 +48,12 @@ public:
 	Position getPosition() const { return m_position; }
 
 protected:
-	int hasMedKit() const;
-	bool hasCoccoon() const;
-
 	unsigned int m_health{ MAX_HEALTH };
 	bool m_isUnconscious{false};
 
-	unsigned int food{ 0 };
+	//unsigned int food{ 0 };
 	unsigned m_actions{ MAX_ACTIONS };
-	std::vector<Item> m_inventory;
+	InventoryNS::Inventory m_inventory;
 	
 	Position m_position;
 };

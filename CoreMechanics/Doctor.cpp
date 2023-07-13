@@ -1,12 +1,12 @@
 #include "pch.h"
 #include "Doctor.h"
 
-void Doctor::useMedKit()
+int Doctor::useMedKit()
 {
-	int medKitIndex = this->Person::hasMedKit();
+	int medKitIndex = this->Person::useMedKit();
 	if (medKitIndex != -1)
 	{
-		this->Person::useMedKit();
-		m_inventory[medKitIndex] = Item(ItemName::medKit);
+		this->Person::takeItemToInventory(Item(ItemName::medKit));
 	}
+	return medKitIndex;
 }

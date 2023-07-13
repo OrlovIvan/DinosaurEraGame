@@ -4,7 +4,7 @@ class Doctor :
     public Person
 {
 public:
-    void useMedKit() override;
+    int useMedKit() override;
     
     
 };

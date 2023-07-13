@@ -47,9 +47,7 @@ void PlayTable::weatherTurn()
 
     for (auto person : persons)
     {
-        person->takeFood();
-        person->takeFood();
-        person->takeFood();
+     
     }
 
     /*while (weatherDeck->getMeteoriteLevel() != 6)

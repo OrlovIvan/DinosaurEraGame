@@ -159,6 +159,7 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="Historian.h" />
     <ClInclude Include="Inventor.h" />
+    <ClInclude Include="Inventory.h" />
     <ClInclude Include="Items.h" />
     <ClInclude Include="MeteoriteLevel.h" />
     <ClInclude Include="pch.h" />
@@ -179,6 +180,7 @@
     <ClCompile Include="Doctor.cpp" />
     <ClCompile Include="Historian.cpp" />
     <ClCompile Include="Inventor.cpp" />
+    <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="MeteoriteLevel.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
