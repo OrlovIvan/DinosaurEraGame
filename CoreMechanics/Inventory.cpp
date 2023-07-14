@@ -37,43 +37,63 @@ bool Inventory::hasCoccoon() const
 	return m_inventory[COCCOON_PLACE].getItemName() == ItemName::coccoon;
 }
 
-bool Inventory::takeItemToInventory(Item item)
+// If Item can be taken to inventory, return ItemName::none
+// if not, return item (like a person take the item, cannot hold it and return back to ground)
+Item Inventory::takeItemToInventory(Item item, int forceTakeIndex)
 {
+	if (forceTakeIndex != -1)
+	{
+		Item swapItem(m_inventory[forceTakeIndex].getItemName());
+		m_inventory[forceTakeIndex] = item;
+		return swapItem;
+	}
+
 	if (item.getItemName() == ItemName::umbrella ||
 		item.getItemName() == ItemName::branch || item.getItemName() == ItemName::bat || item.getItemName() == ItemName::gun)
 	{
 		if (m_inventory[0].getItemName() == ItemName::none)
 		{
 			m_inventory[0] = item;
-			return true;
+			return ItemName::none;
 		}
 		else if (m_inventory[1].getItemName() == ItemName::none)
 		{
 			m_inventory[1] = item;
-			return true;
+			return ItemName::none;
 		}
 	}
 
-	if (hasCoccoon())
+	if (getFreeSpaceIndexInInventory() != -1)
 	{
-		if (hasFreeSpaceInInventory() != -1)
-		{
-			m_inventory[hasFreeSpaceInInventory()] = item;
-			return true;
-		}
-
+		m_inventory[getFreeSpaceIndexInInventory()] = item;
+		return ItemName::none;
 	}
 	else
 	{
-		m_inventory[hasFreeSpaceInInventory()] = item;
-		return true;
+		if (!hasCoccoon() && item.getItemName() == ItemName::coccoon)
+		{
+			m_inventory[COCCOON_PLACE] = item;
+			return ItemName::none;
+		}
 	}
-	return false;
+
+	return item;
 }
 
-bool Inventory::hasFreeSpaceInInventory()
+Item Inventory::dropItemFromInventory(unsigned index)
 {
-	for (int i = 0; i < MAX_INVENTORY_COUNT; ++i)
+	Item dropped(m_inventory[index]);
+	m_inventory[index] = Item(ItemName::none);
+	return dropped;
+}
+
+int Inventory::getFreeSpaceIndexInInventory()
+{
+	unsigned maxIndexCount = MAX_INVENTORY_COUNT;
+	if (!hasCoccoon())
+		maxIndexCount = COCCOON_PLACE;
+
+	for (int i = 0; i < maxIndexCount; ++i)
 	{
 		if (m_inventory[i].getItemName() == ItemName::none)
 			return i;
@@ -96,6 +116,11 @@ bool Inventory::eatFood()
 		return true;
 	}
 	return false;
+}
+
+const std::vector<Item>& Inventory::getInventory() const
+{
+	return m_inventory;
 }
 
 int Inventory::hasFood() const

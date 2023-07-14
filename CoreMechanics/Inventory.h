@@ -13,14 +13,16 @@ namespace InventoryNS
 		Inventory();
 
 		int useMedKit();
-		bool takeItemToInventory(Item item);
+		Item takeItemToInventory(Item item, int forceTakeIndex);
+		Item dropItemFromInventory(unsigned index);
 		bool hasUmbrellaInHand() const;
 		bool eatFood();
+		const std::vector<Item>& getInventory() const;
 
 	private:
 		int hasMedKit() const;
 		bool hasCoccoon() const;
-		bool hasFreeSpaceInInventory();
+		int getFreeSpaceIndexInInventory();
 		int hasFood() const;
 
 		std::vector<Item> m_inventory;

@@ -30,7 +30,9 @@ public:
 
 	virtual int useMedKit();
 
-	bool takeItemToInventory(Item item);
+	Item takeItemToInventory(Item item, int forceTakeIndex = -1);
+	Item dropItemFromInventory(unsigned index);
+	const std::vector<Item>& getInventory() const;
 
 	void eatFood();
 

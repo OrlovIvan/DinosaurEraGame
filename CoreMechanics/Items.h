@@ -24,10 +24,21 @@ class Item
 public:
 	Item() = delete;
 	Item(ItemName itemName) : m_itemName(itemName) {}
+	Item(const Item& src)
+	{
+		m_itemName = src.m_itemName;
+		m_position = src.m_position;
+	}
 
 	ItemName getItemName() const
 	{
 		return m_itemName;
+	}
+
+	void operator=(const Item& src)
+	{
+		m_itemName = src.m_itemName;
+		m_position = src.m_position;
 	}
 
 private:

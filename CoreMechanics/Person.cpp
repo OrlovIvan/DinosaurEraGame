@@ -40,9 +40,19 @@ int Person::useMedKit()
 	return medKitIndex;
 }
 
-bool Person::takeItemToInventory(Item item)
+Item Person::takeItemToInventory(Item item, int forceTakeIndex/* = -1*/)
 {
-	return m_inventory.takeItemToInventory(item);
+	return m_inventory.takeItemToInventory(item, forceTakeIndex);
+}
+
+Item Person::dropItemFromInventory(unsigned index)
+{
+	return m_inventory.dropItemFromInventory(index);
+}
+
+const std::vector<Item>& Person::getInventory() const
+{
+	return m_inventory.getInventory();
 }
 
 void Person::eatFood()

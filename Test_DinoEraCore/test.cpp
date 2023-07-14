@@ -34,8 +34,6 @@ TEST(TestRandomGenerator, TestDices)
     EXPECT_TRUE(dices->getSecondDiceValue() > 0 && dices->getSecondDiceValue() <= 6);
 }
 
-
-
 TEST(TestMeteoriteLevel, TestLevelHandling)
 {
     cout << "Meteorite test." << endl;
