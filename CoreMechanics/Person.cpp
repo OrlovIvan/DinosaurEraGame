@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "Person.h"
-
+#include "Dices.h"
 
 
 Person::Person()
@@ -10,8 +10,8 @@ Person::Person()
 
 unsigned Person::hit()
 {
-	//TODO: use RandomGenerator to get dices values, get weapons bonus in hands. Override in inherited classes to use character's bonuses
-	return 0;
+	Dices::getInstance()->tossDices();
+	return m_inventory.getWeaponInHandsPower() + Dices::getInstance()->getFirstDiceValue() + Dices::getInstance()->getSecondDiceValue();
 }
 
 void Person::getHit()

@@ -3,19 +3,13 @@
 #include <vector>
 #include "Items.h"
 #include "Position.h"
-#include "RandomGenerator.h"
+//#include "RandomGenerator.h"
 #include "Inventory.h"
 
 #define MAX_HEALTH (5)
 #define MAX_ACTIONS (4)
 
 using namespace positions;
-
-enum Hands
-{
-	left = 0,
-	right
-};
 
 class Person
 {

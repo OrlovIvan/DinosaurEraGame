@@ -105,6 +105,7 @@ TEST(TestPersonClass, TestInventory)
         EXPECT_TRUE(inventory[5].getItemName() == ItemName::none);
     }
 
+    // two items more to fill the inventory
     EXPECT_TRUE(person->takeItemToInventory(Item(ItemName::medKit)).getItemName() == ItemName::none);
     EXPECT_TRUE(person->takeItemToInventory(Item(ItemName::gun)).getItemName() == ItemName::none);
     {
@@ -116,6 +117,9 @@ TEST(TestPersonClass, TestInventory)
         EXPECT_TRUE(inventory[4].getItemName() == ItemName::medKit);
         EXPECT_TRUE(inventory[5].getItemName() == ItemName::gun);
     }
+
+    // trying to add one more to the full inventory
+    EXPECT_TRUE(person->takeItemToInventory(Item(ItemName::bat)).getItemName() == ItemName::bat);
 
     person->useMedKit(); //use medKit, free slot #4 in inventory. Put telescope there
     EXPECT_TRUE(person->takeItemToInventory(Item(ItemName::telescope)).getItemName() == ItemName::none);
@@ -157,7 +161,45 @@ TEST(TestPersonClass, TestInventory)
 }
 
 TEST(TestPersonClass, TestWeapons)
-{
+{    
+    // testing weapons power in inventory
+    InventoryNS::Inventory inventory;
+    EXPECT_EQ(inventory.getWeaponInHandsPower(), 0);
+
+    inventory.takeItemToInventory(Item(ItemName::detail));
+    inventory.takeItemToInventory(Item(ItemName::food));
+    EXPECT_EQ(inventory.getWeaponInHandsPower(), 0);
+
+    inventory.takeItemToInventory(Item(ItemName::coccoon));
+    inventory.takeItemToInventory(Item(ItemName::branch));
+    inventory.takeItemToInventory(Item(ItemName::bat));
+    inventory.takeItemToInventory(Item(ItemName::gun));
+    EXPECT_EQ(inventory.getWeaponInHandsPower(), 0);
+
+    inventory.dropItemFromInventory(InventoryNS::Hands::left);
+    inventory.dropItemFromInventory(InventoryNS::Hands::right);
+    inventory.takeItemToInventory(Item(ItemName::bat));
+    inventory.takeItemToInventory(Item(ItemName::gun));
+    EXPECT_EQ(inventory.getWeaponInHandsPower(), 5);
+
+    inventory.dropItemFromInventory(InventoryNS::Hands::left);
+    inventory.takeItemToInventory(Item(ItemName::food));
+    EXPECT_EQ(inventory.getWeaponInHandsPower(), 3);
+
+    inventory.dropItemFromInventory(InventoryNS::Hands::left);
+    inventory.takeItemToInventory(Item(ItemName::gun));
+    EXPECT_EQ(inventory.getWeaponInHandsPower(), 6);
+
+    // test hit() method (weapon power + dices values)
     std::unique_ptr<Person> person(new Policeman);
     person->takeItemToInventory(Item(ItemName::branch));
+    person->takeItemToInventory(Item(ItemName::branch));
+    EXPECT_TRUE(person->hit() >= 2+2); // branch(1)+branch(1)+dices(at least 2)
+
+    // Warning! This test case depends on random generated values, so may sometimes give wrong result when dice's values repeat
+    auto hitVal1 = person->hit();
+    auto hitVal2 = person->hit();
+    if(hitVal1 == hitVal2)
+        hitVal2 = person->hit();
+    EXPECT_TRUE(hitVal1 != hitVal2);
 }

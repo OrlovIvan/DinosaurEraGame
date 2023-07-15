@@ -123,6 +123,11 @@ const std::vector<Item>& Inventory::getInventory() const
 	return m_inventory;
 }
 
+unsigned Inventory::getWeaponInHandsPower() const
+{
+	return m_inventory[left].getItemPower() + m_inventory[right].getItemPower();
+}
+
 int Inventory::hasFood() const
 {
 	for (int i = 0; i < MAX_INVENTORY_COUNT; ++i)
