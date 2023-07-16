@@ -34,7 +34,7 @@ int Inventory::useMedKit()
 
 bool Inventory::hasCoccoon() const
 {
-	return m_inventory[COCCOON_PLACE].getItemName() == ItemName::coccoon;
+	return m_inventory[COCCOON_PLACE].getItemName() == ItemName::cocoon;
 }
 
 // If Item can be taken to inventory, return ItemName::none
@@ -70,7 +70,7 @@ Item Inventory::takeItemToInventory(Item item, int forceTakeIndex)
 	}
 	else
 	{
-		if (!hasCoccoon() && item.getItemName() == ItemName::coccoon)
+		if (!hasCoccoon() && item.getItemName() == ItemName::cocoon)
 		{
 			m_inventory[COCCOON_PLACE] = item;
 			return ItemName::none;

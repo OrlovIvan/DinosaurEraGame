@@ -10,7 +10,7 @@ enum class ItemName
 	food = 0,
 	medKit,
 	umbrella,
-	coccoon,
+	cocoon,
 	detail,
 	telescope,
 

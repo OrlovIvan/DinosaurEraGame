@@ -93,13 +93,13 @@ TEST(TestPersonClass, TestInventory)
     }
 
     // trying to take coccoon
-    EXPECT_TRUE(person->takeItemToInventory(Item(ItemName::coccoon)).getItemName() == ItemName::none);
+    EXPECT_TRUE(person->takeItemToInventory(Item(ItemName::cocoon)).getItemName() == ItemName::none);
     EXPECT_TRUE(person->takeItemToInventory(Item(ItemName::food)).getItemName() == ItemName::none);
     {
         auto& inventory = person->getInventory();
         EXPECT_TRUE(inventory[0].getItemName() == ItemName::branch);
         EXPECT_TRUE(inventory[1].getItemName() == ItemName::umbrella);
-        EXPECT_TRUE(inventory[2].getItemName() == ItemName::coccoon);
+        EXPECT_TRUE(inventory[2].getItemName() == ItemName::cocoon);
         EXPECT_TRUE(inventory[3].getItemName() == ItemName::food);
         EXPECT_TRUE(inventory[4].getItemName() == ItemName::none);
         EXPECT_TRUE(inventory[5].getItemName() == ItemName::none);
@@ -112,7 +112,7 @@ TEST(TestPersonClass, TestInventory)
         auto& inventory = person->getInventory();
         EXPECT_TRUE(inventory[0].getItemName() == ItemName::branch);
         EXPECT_TRUE(inventory[1].getItemName() == ItemName::umbrella);
-        EXPECT_TRUE(inventory[2].getItemName() == ItemName::coccoon);
+        EXPECT_TRUE(inventory[2].getItemName() == ItemName::cocoon);
         EXPECT_TRUE(inventory[3].getItemName() == ItemName::food);
         EXPECT_TRUE(inventory[4].getItemName() == ItemName::medKit);
         EXPECT_TRUE(inventory[5].getItemName() == ItemName::gun);
@@ -127,7 +127,7 @@ TEST(TestPersonClass, TestInventory)
         auto& inventory = person->getInventory();
         EXPECT_TRUE(inventory[0].getItemName() == ItemName::branch);
         EXPECT_TRUE(inventory[1].getItemName() == ItemName::umbrella);
-        EXPECT_TRUE(inventory[2].getItemName() == ItemName::coccoon);
+        EXPECT_TRUE(inventory[2].getItemName() == ItemName::cocoon);
         EXPECT_TRUE(inventory[3].getItemName() == ItemName::food);
         EXPECT_TRUE(inventory[4].getItemName() == ItemName::telescope);
         EXPECT_TRUE(inventory[5].getItemName() == ItemName::gun);
@@ -139,7 +139,7 @@ TEST(TestPersonClass, TestInventory)
         auto& inventory = person->getInventory();
         EXPECT_TRUE(inventory[0].getItemName() == ItemName::branch);
         EXPECT_TRUE(inventory[1].getItemName() == ItemName::umbrella);
-        EXPECT_TRUE(inventory[2].getItemName() == ItemName::coccoon);
+        EXPECT_TRUE(inventory[2].getItemName() == ItemName::cocoon);
         EXPECT_TRUE(inventory[3].getItemName() == ItemName::detail);
         EXPECT_TRUE(inventory[4].getItemName() == ItemName::telescope);
         EXPECT_TRUE(inventory[5].getItemName() == ItemName::gun);
@@ -147,7 +147,7 @@ TEST(TestPersonClass, TestInventory)
 
     EXPECT_TRUE(person->dropItemFromInventory(3).getItemName() == ItemName::detail);
     EXPECT_TRUE(person->dropItemFromInventory(1).getItemName() == ItemName::umbrella);
-    EXPECT_TRUE(person->dropItemFromInventory(2).getItemName() == ItemName::coccoon);
+    EXPECT_TRUE(person->dropItemFromInventory(2).getItemName() == ItemName::cocoon);
     EXPECT_TRUE(person->dropItemFromInventory(5).getItemName() == ItemName::gun);
     EXPECT_TRUE(person->dropItemFromInventory(4).getItemName() == ItemName::telescope);
     EXPECT_TRUE(person->dropItemFromInventory(0).getItemName() == ItemName::branch);
@@ -170,7 +170,7 @@ TEST(TestPersonClass, TestWeapons)
     inventory.takeItemToInventory(Item(ItemName::food));
     EXPECT_EQ(inventory.getWeaponInHandsPower(), 0);
 
-    inventory.takeItemToInventory(Item(ItemName::coccoon));
+    inventory.takeItemToInventory(Item(ItemName::cocoon));
     inventory.takeItemToInventory(Item(ItemName::branch));
     inventory.takeItemToInventory(Item(ItemName::bat));
     inventory.takeItemToInventory(Item(ItemName::gun));
