@@ -82,9 +82,30 @@ Item Inventory::takeItemToInventory(Item item, int forceTakeIndex)
 
 Item Inventory::dropItemFromInventory(unsigned index)
 {
-	Item dropped(m_inventory[index]);
+	Item dropping(m_inventory[index]);
+
+	//we cannot drop a cocoon until we have items inside it
+	if (dropping.getItemName() == ItemName::cocoon)
+	{
+		for (int i = COCCOON_PLACE + 1; i < MAX_INVENTORY_COUNT; ++i)
+		{
+			if (m_inventory[i].getItemName() != ItemName::none)
+				return ItemName::none;
+		}
+	}
 	m_inventory[index] = Item(ItemName::none);
-	return dropped;
+	return dropping;
+}
+
+bool Inventory::swapItemsInInventory(unsigned index1, unsigned index2)
+{
+	if ((index1 >= COCCOON_PLACE || index2 >= COCCOON_PLACE)
+		&& m_inventory[COCCOON_PLACE].getItemName() == ItemName::none)
+		return false;
+	Item temp(m_inventory[index1]);
+	m_inventory[index1] = m_inventory[index2];
+	m_inventory[index2] = temp;
+	return true;
 }
 
 int Inventory::getFreeSpaceIndexInInventory()

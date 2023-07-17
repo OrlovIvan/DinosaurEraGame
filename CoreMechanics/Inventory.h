@@ -21,6 +21,7 @@ namespace InventoryNS
 		int useMedKit();
 		Item takeItemToInventory(Item item, int forceTakeIndex = -1);
 		Item dropItemFromInventory(unsigned index);
+		bool swapItemsInInventory(unsigned index1, unsigned index2);
 		bool hasUmbrellaInHand() const;
 		bool eatFood();
 		const std::vector<Item>& getInventory() const;

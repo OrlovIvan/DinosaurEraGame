@@ -50,6 +50,11 @@ Item Person::dropItemFromInventory(unsigned index)
 	return m_inventory.dropItemFromInventory(index);
 }
 
+bool Person::swapItemsInInventory(unsigned index1, unsigned index2)
+{
+	return m_inventory.swapItemsInInventory(index1, index2);
+}
+
 const std::vector<Item>& Person::getInventory() const
 {
 	return m_inventory.getInventory();

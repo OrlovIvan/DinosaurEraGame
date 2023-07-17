@@ -92,7 +92,7 @@ TEST(TestPersonClass, TestInventory)
         EXPECT_TRUE(inventory[2].getItemName() == ItemName::none);
     }
 
-    // trying to take coccoon
+    // trying to take coccoon and food
     EXPECT_TRUE(person->takeItemToInventory(Item(ItemName::cocoon)).getItemName() == ItemName::none);
     EXPECT_TRUE(person->takeItemToInventory(Item(ItemName::food)).getItemName() == ItemName::none);
     {
@@ -104,6 +104,21 @@ TEST(TestPersonClass, TestInventory)
         EXPECT_TRUE(inventory[4].getItemName() == ItemName::none);
         EXPECT_TRUE(inventory[5].getItemName() == ItemName::none);
     }
+
+    // swap umbrella and food
+    EXPECT_TRUE(person->hasUmbrellaInHand());
+    EXPECT_TRUE(person->swapItemsInInventory(1,3));
+    EXPECT_FALSE(person->hasUmbrellaInHand());
+    {
+        auto& inventory = person->getInventory();
+        EXPECT_TRUE(inventory[0].getItemName() == ItemName::branch);
+        EXPECT_TRUE(inventory[1].getItemName() == ItemName::food);
+        EXPECT_TRUE(inventory[2].getItemName() == ItemName::cocoon);
+        EXPECT_TRUE(inventory[3].getItemName() == ItemName::umbrella);
+        EXPECT_TRUE(inventory[4].getItemName() == ItemName::none);
+        EXPECT_TRUE(inventory[5].getItemName() == ItemName::none);
+    }
+    EXPECT_TRUE(person->swapItemsInInventory(1, 3));
 
     // two items more to fill the inventory
     EXPECT_TRUE(person->takeItemToInventory(Item(ItemName::medKit)).getItemName() == ItemName::none);
@@ -146,10 +161,16 @@ TEST(TestPersonClass, TestInventory)
     }
 
     EXPECT_TRUE(person->dropItemFromInventory(3).getItemName() == ItemName::detail);
+    EXPECT_TRUE(person->hasUmbrellaInHand());
     EXPECT_TRUE(person->dropItemFromInventory(1).getItemName() == ItemName::umbrella);
-    EXPECT_TRUE(person->dropItemFromInventory(2).getItemName() == ItemName::cocoon);
+    EXPECT_FALSE(person->hasUmbrellaInHand());
+
+    // trying to drop a cocoon with items inside it
+    EXPECT_TRUE(person->dropItemFromInventory(2).getItemName() == ItemName::none);  //we cannot drop a cocoon until we have items inside it
     EXPECT_TRUE(person->dropItemFromInventory(5).getItemName() == ItemName::gun);
     EXPECT_TRUE(person->dropItemFromInventory(4).getItemName() == ItemName::telescope);
+    EXPECT_TRUE(person->dropItemFromInventory(2).getItemName() == ItemName::cocoon);
+
     EXPECT_TRUE(person->dropItemFromInventory(0).getItemName() == ItemName::branch);
     {
         auto& inventory = person->getInventory();
