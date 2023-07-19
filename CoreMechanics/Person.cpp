@@ -11,6 +11,7 @@ Person::Person()
 unsigned Person::hit()
 {
 	Dices::getInstance()->tossDices();
+	takeAction();
 	return m_inventory.getWeaponInHandsPower() + Dices::getInstance()->getFirstDiceValue() + Dices::getInstance()->getSecondDiceValue();
 }
 
@@ -37,21 +38,25 @@ int Person::useMedKit()
 	{
 		m_health = MAX_HEALTH;
 	}
+	takeAction();
 	return medKitIndex;
 }
 
 Item Person::takeItemToInventory(Item item, int forceTakeIndex/* = -1*/)
 {
+	takeAction();
 	return m_inventory.takeItemToInventory(item, forceTakeIndex);
 }
 
 Item Person::dropItemFromInventory(unsigned index)
 {
+	takeAction();
 	return m_inventory.dropItemFromInventory(index);
 }
 
 bool Person::swapItemsInInventory(unsigned index1, unsigned index2)
 {
+	takeAction();
 	return m_inventory.swapItemsInInventory(index1, index2);
 }
 
@@ -67,6 +72,7 @@ void Person::eatFood()
 	{
 		m_health++;
 	}
+	takeAction();
 }
 
 int Person::getHealth() const
@@ -87,6 +93,7 @@ bool Person::stepUp()
 		m_position.y = positions::Max_Y;
 		return false;
 	}
+	takeAction();
 	return true;
 }
 
@@ -98,6 +105,7 @@ bool Person::stepDown()
 		m_position.y = positions::Min_Y;
 		return false;
 	}
+	takeAction();
 	return true;
 }
 
@@ -109,6 +117,7 @@ bool Person::stepRight()
 		m_position.x = positions::Max_X;
 		return false;
 	}
+	takeAction();
 	return true;
 }
 
@@ -120,7 +129,21 @@ bool Person::stepLeft()
 		m_position.x = positions::Min_X;
 		return false;
 	}
+	takeAction();
 	return true;
+}
+
+void Person::addAction(unsigned count/* = 1*/)
+{
+	m_actions += count;
+	if(m_actions > MAX_ACTIONS)
+		m_actions = MAX_ACTIONS;
+}
+
+void Person::takeAction()
+{
+	if (m_actions > 0)
+		m_actions--;
 }
 
 

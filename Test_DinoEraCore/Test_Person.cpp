@@ -224,3 +224,32 @@ TEST(TestPersonClass, TestWeapons)
         hitVal2 = person->hit();
     EXPECT_TRUE(hitVal1 != hitVal2);
 }
+
+TEST(TestPersonClass, TestActions)
+{
+    std::unique_ptr<Person> person(new Policeman);
+    EXPECT_EQ(person->getActionsCount(), MAX_ACTIONS);
+
+    person->takeItemToInventory(Item(ItemName::branch));
+    EXPECT_EQ(person->getActionsCount(), MAX_ACTIONS-1);
+
+    person->dropItemFromInventory(0);
+    EXPECT_EQ(person->getActionsCount(), MAX_ACTIONS - 2);
+
+    person->hit();
+    EXPECT_EQ(person->getActionsCount(), MAX_ACTIONS - 3);
+    person->hit();
+    EXPECT_EQ(person->getActionsCount(), MAX_ACTIONS - 4);
+
+    person->addAction();
+    EXPECT_EQ(person->getActionsCount(), MAX_ACTIONS - 3);
+
+    person->addAction(MAX_ACTIONS);
+    EXPECT_EQ(person->getActionsCount(), MAX_ACTIONS);
+
+    person->stepDown();
+    person->stepUp();
+    person->stepLeft();
+    person->stepRight();
+    EXPECT_EQ(person->getActionsCount(), MAX_ACTIONS - 4);
+}

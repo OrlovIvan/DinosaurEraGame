@@ -3,7 +3,6 @@
 #include <vector>
 #include "Items.h"
 #include "Position.h"
-//#include "RandomGenerator.h"
 #include "Inventory.h"
 
 #define MAX_HEALTH (5)
@@ -43,8 +42,12 @@ public:
 	bool stepLeft();
 
 	Position getPosition() const { return m_position; }
+	unsigned getActionsCount() const { return m_actions; }
+	void addAction(unsigned count = 1);
 
 protected:
+	void takeAction();
+
 	unsigned int m_health{ MAX_HEALTH };
 	bool m_isUnconscious{false};
 
