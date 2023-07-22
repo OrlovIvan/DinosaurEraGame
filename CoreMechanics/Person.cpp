@@ -5,7 +5,6 @@
 
 Person::Person()
 {
-	
 }
 
 unsigned Person::hit()

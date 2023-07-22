@@ -4,6 +4,7 @@
 class Policeman :
     public Person
 {
+public:
     //attack twice
     unsigned hit() override;
 };
