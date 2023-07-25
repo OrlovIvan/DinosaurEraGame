@@ -197,17 +197,17 @@ TEST(TestPersonClass, TestWeapons)
     inventory.takeItemToInventory(Item(ItemName::gun));
     EXPECT_EQ(inventory.getWeaponInHandsPower(), 0);
 
-    inventory.dropItemFromInventory(InventoryNS::Hands::left);
-    inventory.dropItemFromInventory(InventoryNS::Hands::right);
+    inventory.dropItemFromInventory(InventoryNS::InventoryPlaces::leftHand);
+    inventory.dropItemFromInventory(InventoryNS::InventoryPlaces::rightHand);
     inventory.takeItemToInventory(Item(ItemName::bat));
     inventory.takeItemToInventory(Item(ItemName::gun));
     EXPECT_EQ(inventory.getWeaponInHandsPower(), 5);
 
-    inventory.dropItemFromInventory(InventoryNS::Hands::left);
+    inventory.dropItemFromInventory(InventoryNS::InventoryPlaces::leftHand);
     inventory.takeItemToInventory(Item(ItemName::food));
     EXPECT_EQ(inventory.getWeaponInHandsPower(), 3);
 
-    inventory.dropItemFromInventory(InventoryNS::Hands::left);
+    inventory.dropItemFromInventory(InventoryNS::InventoryPlaces::leftHand);
     inventory.takeItemToInventory(Item(ItemName::gun));
     EXPECT_EQ(inventory.getWeaponInHandsPower(), 6);
 

@@ -146,7 +146,7 @@ const std::vector<Item>& Inventory::getInventory() const
 
 unsigned Inventory::getWeaponInHandsPower() const
 {
-	return m_inventory[left].getItemPower() + m_inventory[right].getItemPower();
+	return m_inventory[leftHand].getItemPower() + m_inventory[rightHand].getItemPower();
 }
 
 int Inventory::hasFood() const
