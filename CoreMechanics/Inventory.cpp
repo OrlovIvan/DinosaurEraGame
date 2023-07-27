@@ -49,7 +49,7 @@ Item Inventory::takeItemToInventory(Item item, int forceTakeIndex)
 	}
 
 	if (item.getItemName() == ItemName::umbrella ||
-		item.getItemName() == ItemName::branch || item.getItemName() == ItemName::bat || item.getItemName() == ItemName::gun)
+		item.getItemName() == ItemName::stick || item.getItemName() == ItemName::bat || item.getItemName() == ItemName::gun)
 	{
 		if (m_inventory[0].getItemName() == ItemName::none)
 		{

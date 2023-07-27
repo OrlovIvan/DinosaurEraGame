@@ -19,7 +19,7 @@ TEST(TestCharacters, TestPoliceman)
     Policeman policeman;
     checkHitValue(&policeman, policeman.hit());
 
-    policeman.takeItemToInventory(Item(ItemName::branch));
+    policeman.takeItemToInventory(Item(ItemName::stick));
     checkHitValue(&policeman, policeman.hit()-1);
 
     policeman.takeItemToInventory(Item(ItemName::bat));
@@ -42,7 +42,7 @@ TEST(TestCharacters, TestDoctor)
 
     doctor.takeItemToInventory(Item(ItemName::cocoon));
     doctor.swapItemsInInventory(InventoryNS::InventoryPlaces::leftHand, InventoryNS::InventoryPlaces::cocoonCell_1);
-    doctor.takeItemToInventory(Item(ItemName::branch));
+    doctor.takeItemToInventory(Item(ItemName::stick));
     doctor.takeItemToInventory(Item(ItemName::gun));
 
     checkHitValue(&doctor, doctor.hit());

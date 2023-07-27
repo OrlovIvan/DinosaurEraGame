@@ -82,12 +82,12 @@ TEST(TestPersonClass, TestPositioning)
 TEST(TestPersonClass, TestInventory)
 {
     std::unique_ptr<Person> person(new Policeman);
-    person->takeItemToInventory(Item(ItemName::branch));
+    person->takeItemToInventory(Item(ItemName::stick));
     person->takeItemToInventory(Item(ItemName::umbrella));
-    EXPECT_TRUE(person->takeItemToInventory(Item(ItemName::branch)).getItemName() == ItemName::branch );
+    EXPECT_TRUE(person->takeItemToInventory(Item(ItemName::stick)).getItemName() == ItemName::stick );
     {
         auto& inventory = person->getInventory();
-        EXPECT_TRUE(inventory[0].getItemName() == ItemName::branch);
+        EXPECT_TRUE(inventory[0].getItemName() == ItemName::stick);
         EXPECT_TRUE(inventory[1].getItemName() == ItemName::umbrella);
         EXPECT_TRUE(inventory[2].getItemName() == ItemName::none);
     }
@@ -97,7 +97,7 @@ TEST(TestPersonClass, TestInventory)
     EXPECT_TRUE(person->takeItemToInventory(Item(ItemName::food)).getItemName() == ItemName::none);
     {
         auto& inventory = person->getInventory();
-        EXPECT_TRUE(inventory[0].getItemName() == ItemName::branch);
+        EXPECT_TRUE(inventory[0].getItemName() == ItemName::stick);
         EXPECT_TRUE(inventory[1].getItemName() == ItemName::umbrella);
         EXPECT_TRUE(inventory[2].getItemName() == ItemName::cocoon);
         EXPECT_TRUE(inventory[3].getItemName() == ItemName::food);
@@ -111,7 +111,7 @@ TEST(TestPersonClass, TestInventory)
     EXPECT_FALSE(person->hasUmbrellaInHand());
     {
         auto& inventory = person->getInventory();
-        EXPECT_TRUE(inventory[0].getItemName() == ItemName::branch);
+        EXPECT_TRUE(inventory[0].getItemName() == ItemName::stick);
         EXPECT_TRUE(inventory[1].getItemName() == ItemName::food);
         EXPECT_TRUE(inventory[2].getItemName() == ItemName::cocoon);
         EXPECT_TRUE(inventory[3].getItemName() == ItemName::umbrella);
@@ -125,7 +125,7 @@ TEST(TestPersonClass, TestInventory)
     EXPECT_TRUE(person->takeItemToInventory(Item(ItemName::gun)).getItemName() == ItemName::none);
     {
         auto& inventory = person->getInventory();
-        EXPECT_TRUE(inventory[0].getItemName() == ItemName::branch);
+        EXPECT_TRUE(inventory[0].getItemName() == ItemName::stick);
         EXPECT_TRUE(inventory[1].getItemName() == ItemName::umbrella);
         EXPECT_TRUE(inventory[2].getItemName() == ItemName::cocoon);
         EXPECT_TRUE(inventory[3].getItemName() == ItemName::food);
@@ -140,7 +140,7 @@ TEST(TestPersonClass, TestInventory)
     EXPECT_TRUE(person->takeItemToInventory(Item(ItemName::telescope)).getItemName() == ItemName::none);
     {
         auto& inventory = person->getInventory();
-        EXPECT_TRUE(inventory[0].getItemName() == ItemName::branch);
+        EXPECT_TRUE(inventory[0].getItemName() == ItemName::stick);
         EXPECT_TRUE(inventory[1].getItemName() == ItemName::umbrella);
         EXPECT_TRUE(inventory[2].getItemName() == ItemName::cocoon);
         EXPECT_TRUE(inventory[3].getItemName() == ItemName::food);
@@ -152,7 +152,7 @@ TEST(TestPersonClass, TestInventory)
     EXPECT_TRUE(person->takeItemToInventory(Item(ItemName::detail), 3).getItemName() == ItemName::food);
     {
         auto& inventory = person->getInventory();
-        EXPECT_TRUE(inventory[0].getItemName() == ItemName::branch);
+        EXPECT_TRUE(inventory[0].getItemName() == ItemName::stick);
         EXPECT_TRUE(inventory[1].getItemName() == ItemName::umbrella);
         EXPECT_TRUE(inventory[2].getItemName() == ItemName::cocoon);
         EXPECT_TRUE(inventory[3].getItemName() == ItemName::detail);
@@ -171,7 +171,7 @@ TEST(TestPersonClass, TestInventory)
     EXPECT_TRUE(person->dropItemFromInventory(4).getItemName() == ItemName::telescope);
     EXPECT_TRUE(person->dropItemFromInventory(2).getItemName() == ItemName::cocoon);
 
-    EXPECT_TRUE(person->dropItemFromInventory(0).getItemName() == ItemName::branch);
+    EXPECT_TRUE(person->dropItemFromInventory(0).getItemName() == ItemName::stick);
     {
         auto& inventory = person->getInventory();
         for (int i = 0;i < InventoryNS::MAX_INVENTORY_COUNT;++i)
@@ -192,7 +192,7 @@ TEST(TestPersonClass, TestWeapons)
     EXPECT_EQ(inventory.getWeaponInHandsPower(), 0);
 
     inventory.takeItemToInventory(Item(ItemName::cocoon));
-    inventory.takeItemToInventory(Item(ItemName::branch));
+    inventory.takeItemToInventory(Item(ItemName::stick));
     inventory.takeItemToInventory(Item(ItemName::bat));
     inventory.takeItemToInventory(Item(ItemName::gun));
     EXPECT_EQ(inventory.getWeaponInHandsPower(), 0);
@@ -213,8 +213,8 @@ TEST(TestPersonClass, TestWeapons)
 
     // test hit() method (weapon power + dices values)
     std::unique_ptr<Person> person(new Policeman);
-    person->takeItemToInventory(Item(ItemName::branch));
-    person->takeItemToInventory(Item(ItemName::branch));
+    person->takeItemToInventory(Item(ItemName::stick));
+    person->takeItemToInventory(Item(ItemName::stick));
     EXPECT_TRUE(person->hit() >= 2+2); // branch(1)+branch(1)+dices(at least 2)
 
     // Warning! This test case depends on random generated values, so may sometimes give wrong result when dice's values repeat
@@ -230,7 +230,7 @@ TEST(TestPersonClass, TestActions)
     std::unique_ptr<Person> person(new Policeman);
     EXPECT_EQ(person->getActionsCount(), MAX_ACTIONS);
 
-    person->takeItemToInventory(Item(ItemName::branch));
+    person->takeItemToInventory(Item(ItemName::stick));
     EXPECT_EQ(person->getActionsCount(), MAX_ACTIONS-1);
 
     person->dropItemFromInventory(0);
