@@ -63,18 +63,15 @@ Item Inventory::takeItemToInventory(Item item, int forceTakeIndex)
 		}
 	}
 
-	if (getFreeSpaceIndexInInventory() != -1)
+	if (!hasCoccoon() && item.getItemName() == ItemName::cocoon)
+	{
+		m_inventory[InventoryPlaces::cocoonPlace] = item;
+		return ItemName::none;
+	}
+	else if (getFreeSpaceIndexInInventory() != -1)
 	{
 		m_inventory[getFreeSpaceIndexInInventory()] = item;
 		return ItemName::none;
-	}
-	else
-	{
-		if (!hasCoccoon() && item.getItemName() == ItemName::cocoon)
-		{
-			m_inventory[COCCOON_PLACE] = item;
-			return ItemName::none;
-		}
 	}
 
 	return item;

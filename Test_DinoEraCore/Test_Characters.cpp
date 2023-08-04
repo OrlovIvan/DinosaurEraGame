@@ -37,8 +37,10 @@ TEST(TestCharacters, TestDoctor)
 
     EXPECT_TRUE(doctor.takeItemToInventory(Item(ItemName::medKit)).getItemName() == ItemName::none);
     doctor.useMedKit();
-    auto& inventory = doctor.getInventory();
-    EXPECT_TRUE(inventory[InventoryNS::InventoryPlaces::leftHand].getItemName() == ItemName::medKit);
+    {
+        auto& inventory = doctor.getInventory();
+        EXPECT_TRUE(inventory[InventoryNS::InventoryPlaces::leftHand].getItemName() == ItemName::medKit);
+    }
 
     doctor.takeItemToInventory(Item(ItemName::cocoon));
     doctor.swapItemsInInventory(InventoryNS::InventoryPlaces::leftHand, InventoryNS::InventoryPlaces::cocoonCell_1);
@@ -46,4 +48,13 @@ TEST(TestCharacters, TestDoctor)
     doctor.takeItemToInventory(Item(ItemName::gun));
 
     checkHitValue(&doctor, doctor.hit());
+
+    doctor.getHit();
+    EXPECT_EQ(doctor.getHealth(), MAX_HEALTH-1);
+    doctor.useMedKit();
+    EXPECT_EQ(doctor.getHealth(), MAX_HEALTH);
+    {
+        auto& inventory = doctor.getInventory();
+        EXPECT_TRUE(inventory[InventoryNS::InventoryPlaces::cocoonCell_1].getItemName() == ItemName::medKit);
+    }
 }
