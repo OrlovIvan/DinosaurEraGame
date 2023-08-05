@@ -4,29 +4,38 @@
 const unsigned dice_min = 1;
 const unsigned dice_max = 6;
 
-class Dices
+namespace DicesNS
 {
-	~Dices() { delete m_instance; }
-public:
-	static Dices* getInstance()
+	enum TheDice
 	{
-		if (!m_instance)
+		first,
+		second
+	};
+
+	class Dices
+	{
+		~Dices() { delete m_instance; }
+	public:
+		static Dices* getInstance()
 		{
-			m_instance = new Dices();
+			if (!m_instance)
+			{
+				m_instance = new Dices();
+			}
+			return m_instance;
 		}
-		return m_instance;
-	}
 
-	void rollDices();
-	unsigned getFirstDiceValue() const { return m_firstDice; }
-	unsigned getSecondDiceValue() const { return m_secondDice; }
-private:
-	Dices();
+		void rollDices();
+		void rollOneDice(TheDice dice);
+		unsigned getFirstDiceValue() const { return m_firstDice; }
+		unsigned getSecondDiceValue() const { return m_secondDice; }
+	private:
+		Dices();
 
-	RandomGenerator randGen;
-	static Dices* m_instance;
+		RandomGenerator randGen;
+		static Dices* m_instance;
 
-	unsigned m_firstDice{ 0 };
-	unsigned m_secondDice{ 0 };
-};
-
+		unsigned m_firstDice{ 0 };
+		unsigned m_secondDice{ 0 };
+	};
+}

@@ -13,6 +13,7 @@
 #include "Dices.h"
 
 using namespace std;
+using namespace DicesNS;
 
 TEST(TestItem)
 {

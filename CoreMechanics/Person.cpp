@@ -2,6 +2,7 @@
 #include "Person.h"
 #include "Dices.h"
 
+using namespace DicesNS;
 
 Person::Person()
 {

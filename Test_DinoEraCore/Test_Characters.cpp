@@ -1,10 +1,13 @@
 #include <iostream>
 
 #include "pch.h"
+#include "Dices.h"
 #include "Policeman.h"
 #include "Doctor.h"
 #include "Astronomer.h"
-#include "Dices.h"
+#include "Historian.h"
+
+using namespace DicesNS;
 
 void checkHitValue(Person* person, unsigned expectedHitVal)
 {
@@ -68,3 +71,18 @@ TEST(TestCharacters, TestAstronomer)
     auto dicesVal = Dices::getInstance()->getFirstDiceValue() + Dices::getInstance()->getSecondDiceValue();
     EXPECT_TRUE(luck > dicesVal);
 }
+
+TEST(TestCharacters, TestHistorian)
+{
+    Historian historian;
+
+    int count = 100;
+    while (count--)
+    {
+        historian.hit();
+        EXPECT_TRUE(Dices::getInstance()->getFirstDiceValue() != 1);
+        EXPECT_TRUE(Dices::getInstance()->getSecondDiceValue() != 1);
+    }
+}
+
+
