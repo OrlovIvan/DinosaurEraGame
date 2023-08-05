@@ -9,7 +9,7 @@ public:
     ~Astronomer() {};
 
     bool isThunderSafe() override { return true; }
-    int luck() override { return 1; }
+    unsigned getLuck() const override;
 private:
 
 };

@@ -9,7 +9,7 @@ Person::Person()
 
 unsigned Person::hit()
 {
-	Dices::getInstance()->tossDices();
+	Dices::getInstance()->rollDices();
 	takeAction();
 	return m_inventory.getWeaponInHandsPower() + Dices::getInstance()->getFirstDiceValue() + Dices::getInstance()->getSecondDiceValue();
 }
@@ -82,6 +82,12 @@ int Person::getHealth() const
 bool Person::hasUmbrellaInHand() const
 {
 	return m_inventory.hasUmbrellaInHand();
+}
+
+unsigned Person::getLuck() const
+{
+	Dices::getInstance()->rollDices();
+	return Dices::getInstance()->getFirstDiceValue() + Dices::getInstance()->getSecondDiceValue();
 }
 
 bool Person::stepUp()

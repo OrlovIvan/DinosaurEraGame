@@ -3,6 +3,7 @@
 #include "pch.h"
 #include "Policeman.h"
 #include "Doctor.h"
+#include "Astronomer.h"
 #include "Dices.h"
 
 void checkHitValue(Person* person, unsigned expectedHitVal)
@@ -57,4 +58,13 @@ TEST(TestCharacters, TestDoctor)
         auto& inventory = doctor.getInventory();
         EXPECT_TRUE(inventory[InventoryNS::InventoryPlaces::cocoonCell_1].getItemName() == ItemName::medKit);
     }
+}
+
+TEST(TestCharacters, TestAstronomer)
+{
+    Astronomer astronomer;
+
+    auto luck = astronomer.getLuck();
+    auto dicesVal = Dices::getInstance()->getFirstDiceValue() + Dices::getInstance()->getSecondDiceValue();
+    EXPECT_TRUE(luck > dicesVal);
 }

@@ -34,7 +34,7 @@ public:
 
 	bool hasUmbrellaInHand() const;
 	virtual bool isThunderSafe() { return false; }
-	virtual int luck() { return 0; }
+	virtual unsigned getLuck() const;
 
 	bool stepUp();
 	bool stepDown();

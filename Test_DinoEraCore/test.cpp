@@ -29,7 +29,7 @@ TEST(TestRandomGenerator, TestDices)
 
     EXPECT_TRUE(dices->getFirstDiceValue() > 0 && dices->getFirstDiceValue() <= 6);
     EXPECT_TRUE(dices->getSecondDiceValue() > 0 && dices->getSecondDiceValue() <= 6);
-    dices->tossDices();
+    dices->rollDices();
     EXPECT_TRUE(dices->getFirstDiceValue() > 0 && dices->getFirstDiceValue() <= 6);
     EXPECT_TRUE(dices->getSecondDiceValue() > 0 && dices->getSecondDiceValue() <= 6);
 }

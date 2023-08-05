@@ -17,7 +17,7 @@ public:
 		return m_instance;
 	}
 
-	void tossDices();
+	void rollDices();
 	unsigned getFirstDiceValue() const { return m_firstDice; }
 	unsigned getSecondDiceValue() const { return m_secondDice; }
 private:
