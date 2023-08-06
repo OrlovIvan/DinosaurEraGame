@@ -2,6 +2,7 @@
 
 #include "pch.h"
 #include "Dices.h"
+#include "Luck.h"
 #include "Policeman.h"
 #include "Doctor.h"
 #include "Astronomer.h"
@@ -33,6 +34,8 @@ TEST(TestCharacters, TestPoliceman)
     policeman.swapItemsInInventory(InventoryNS::InventoryPlaces::leftHand, InventoryNS::InventoryPlaces::cocoonCell_1);
     policeman.swapItemsInInventory(InventoryNS::InventoryPlaces::rightHand, InventoryNS::InventoryPlaces::cocoonCell_2);
     checkHitValue(&policeman, policeman.hit());
+
+    EXPECT_FALSE(policeman.getLuck().isThunderSafe());
 }
 
 TEST(TestCharacters, TestDoctor)
@@ -61,6 +64,8 @@ TEST(TestCharacters, TestDoctor)
         auto& inventory = doctor.getInventory();
         EXPECT_TRUE(inventory[InventoryNS::InventoryPlaces::cocoonCell_1].getItemName() == ItemName::medKit);
     }
+
+    EXPECT_FALSE(doctor.getLuck().isThunderSafe());
 }
 
 TEST(TestCharacters, TestAstronomer)
@@ -68,8 +73,15 @@ TEST(TestCharacters, TestAstronomer)
     Astronomer astronomer;
 
     auto luck = astronomer.getLuck();
+    EXPECT_TRUE(luck.isThunderSafe());
+
+    auto lightningLuck = luck.getLightningLuck();
     auto dicesVal = Dices::getInstance()->getFirstDiceValue() + Dices::getInstance()->getSecondDiceValue();
-    EXPECT_TRUE(luck > dicesVal);
+    EXPECT_TRUE(lightningLuck > dicesVal);
+
+    auto ozonLuck = luck.getOzonLuck();
+    dicesVal = Dices::getInstance()->getFirstDiceValue() + Dices::getInstance()->getSecondDiceValue();
+    EXPECT_TRUE(ozonLuck == dicesVal);
 }
 
 TEST(TestCharacters, TestHistorian)
@@ -83,6 +95,6 @@ TEST(TestCharacters, TestHistorian)
         EXPECT_TRUE(Dices::getInstance()->getFirstDiceValue() != 1);
         EXPECT_TRUE(Dices::getInstance()->getSecondDiceValue() != 1);
     }
+
+    EXPECT_FALSE(historian.getLuck().isThunderSafe());
 }
-
-

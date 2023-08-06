@@ -5,11 +5,11 @@ class Astronomer :
     public Person
 {
 public:
-    Astronomer() {};
-    ~Astronomer() {};
+    Astronomer();
+    virtual ~Astronomer() {};
 
     bool isThunderSafe() override { return true; }
-    unsigned getLuck() const override;
+    
 private:
 
 };

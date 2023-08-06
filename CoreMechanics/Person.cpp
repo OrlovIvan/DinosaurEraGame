@@ -6,6 +6,7 @@ using namespace DicesNS;
 
 Person::Person()
 {
+	m_luck = new LuckNS::Luck(false);
 }
 
 unsigned Person::hit()
@@ -80,15 +81,15 @@ int Person::getHealth() const
 	return m_health;
 }
 
+//TODO: think if this method should be a member of Person class
 bool Person::hasUmbrellaInHand() const
 {
 	return m_inventory.hasUmbrellaInHand();
 }
 
-unsigned Person::getLuck() const
+const LuckNS::Luck& Person::getLuck() const
 {
-	Dices::getInstance()->rollDices();
-	return Dices::getInstance()->getFirstDiceValue() + Dices::getInstance()->getSecondDiceValue();
+	return *m_luck;
 }
 
 bool Person::stepUp()

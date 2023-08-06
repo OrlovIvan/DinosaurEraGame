@@ -4,6 +4,7 @@
 #include "Items.h"
 #include "Position.h"
 #include "Inventory.h"
+#include "Luck.h"
 
 #define MAX_HEALTH (5)
 #define MAX_ACTIONS (4)
@@ -34,7 +35,7 @@ public:
 
 	bool hasUmbrellaInHand() const;
 	virtual bool isThunderSafe() { return false; }
-	virtual unsigned getLuck() const;
+	const LuckNS::Luck& getLuck() const;
 
 	bool stepUp();
 	bool stepDown();
@@ -51,10 +52,11 @@ protected:
 	unsigned int m_health{ MAX_HEALTH };
 	bool m_isUnconscious{false};
 
-	//unsigned int food{ 0 };
 	unsigned m_actions{ MAX_ACTIONS };
 	InventoryNS::Inventory m_inventory;
 	
 	Position m_position;
+
+	LuckNS::Luck* m_luck{nullptr};
 };
 

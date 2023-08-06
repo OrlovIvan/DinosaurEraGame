@@ -1,7 +1,12 @@
 #include "pch.h"
 #include "Astronomer.h"
 
-unsigned Astronomer::getLuck() const
+Astronomer::Astronomer() 
 {
-	return Person::getLuck()+1;
+	if (m_luck)
+	{
+		delete m_luck;
+		m_luck = nullptr;
+		m_luck = new LuckNS::Luck(true, 1);
+	}
 }
