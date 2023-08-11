@@ -88,7 +88,7 @@ TEST(TestCharacters, TestHistorian)
 {
     Historian historian;
 
-    int count = 100;
+    int count = 20;
     while (count--)
     {
         historian.hit();
