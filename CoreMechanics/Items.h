@@ -21,7 +21,7 @@ enum class ItemName
 
 enum WeaponPower
 {
-	branch = 1,
+	stick = 1,
 	bat = 2,
 	gun = 3
 };
@@ -45,7 +45,7 @@ public:
 	unsigned getItemPower() const
 	{
 		if (m_itemName == ItemName::stick)
-			return WeaponPower::branch;
+			return WeaponPower::stick;
 		if(m_itemName == ItemName::bat)
 			return WeaponPower::bat;
 		if (m_itemName == ItemName::gun)

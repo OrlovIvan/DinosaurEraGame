@@ -36,18 +36,20 @@ TEST(TestPersonClass, TestPositioning)
 {
     std::unique_ptr<Person> person(new Policeman());
 
-    EXPECT_EQ(person->getPosition().x, 0);
-    EXPECT_EQ(person->getPosition().y, 0);
+    positions::Position defaultPosition;
+
+    EXPECT_EQ(person->getPosition().x, defaultPosition.x);
+    EXPECT_EQ(person->getPosition().y, defaultPosition.y);
 
     EXPECT_TRUE(person->stepDown());
     EXPECT_TRUE(person->stepRight());
-    EXPECT_EQ(person->getPosition().x, 1);
-    EXPECT_EQ(person->getPosition().y, -1);
+    EXPECT_EQ(person->getPosition().x, defaultPosition.x+1);
+    EXPECT_EQ(person->getPosition().y, defaultPosition.y-1);
 
     person->stepUp();
     person->stepLeft();
-    EXPECT_EQ(person->getPosition().x, 0);
-    EXPECT_EQ(person->getPosition().y, 0);
+    EXPECT_EQ(person->getPosition().x, defaultPosition.x);
+    EXPECT_EQ(person->getPosition().y, defaultPosition.y);
 
     for (int i = 0;i <= positions::Max_X;++i)
     {

@@ -2,14 +2,14 @@
 
 namespace positions
 {
-	const int Max_X = (9);
-	const int Max_Y = (9);
-	const int Min_X = (-9);
-	const int Min_Y = (-9);
+	const int Max_X = (32);
+	const int Max_Y = (32);
+	const int Min_X = (0);
+	const int Min_Y = (0);
 
 	struct Position
 	{
-		int x{ 0 };
-		int y{ 0 };
+		int x{ Max_X/2 };
+		int y{ Max_Y/2 };
 	};
 }

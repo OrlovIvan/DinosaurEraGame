@@ -1,14 +1,26 @@
-// DinosaurEraGame.cpp : This file contains the 'main' function. Program execution begins and ends there.
+// DinosaurEraGame.cpp : This file contains the 'main' function. Program execution begins and ends here.
 //
 
 #include <iostream>
+#include <thread>
 #include <PlayTable.h>
-#include <PlayTableSDL.h>
+//#include <PlayTableSDL.h>
+#include "SFMLGraphicUnit.h"
 
 using namespace std;
 
 int main()
 {
+    SFMLGraphicUnit graphics;
+    /*thread intro = thread(&SFMLGraphicUnit::showIntro, &graphics);
+    intro.join();*/
+
+    thread interface = thread(&SFMLGraphicUnit::showMainWindow, &graphics);
+    
+    interface.join();
+    //char a;
+    //cin >> a;
+    return 0;
     cout << "Choose game difficulty: 1 - Easy, 2 - Medium, 3 - Hard" << endl;
     /*int diff = 0;
     while(diff <= 0 || diff > 3)
@@ -23,7 +35,7 @@ int main()
         level = DifficultyLevel::Hard;
     PlayTable table(level);
 
-    drawTable();
+    //drawTable();
     
 
 	return 0;
