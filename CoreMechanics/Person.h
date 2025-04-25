@@ -9,8 +9,6 @@
 #define MAX_HEALTH (5)
 #define MAX_ACTIONS (4)
 
-using namespace positions;
-
 class Person
 {
 public:
@@ -42,7 +40,7 @@ public:
 	bool stepRight();
 	bool stepLeft();
 
-	Position getPosition() const { return m_position; }
+	positions::Position getPosition() const { return m_position; }
 	unsigned getActionsCount() const { return m_actions; }
 	void addAction(unsigned count = 1);
 
@@ -55,7 +53,7 @@ protected:
 	unsigned m_actions{ MAX_ACTIONS };
 	InventoryNS::Inventory m_inventory;
 	
-	Position m_position;
+	positions::Position m_position;
 
 	LuckNS::Luck* m_luck{nullptr};
 };

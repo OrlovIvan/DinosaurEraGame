@@ -7,6 +7,8 @@ using namespace DicesNS;
 Person::Person()
 {
 	m_luck = new LuckNS::Luck(false);
+	m_position.x = positions::Max_X / 2;
+	m_position.y = positions::Max_Y / 2;
 }
 
 unsigned Person::hit()

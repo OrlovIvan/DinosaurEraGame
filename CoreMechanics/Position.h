@@ -9,7 +9,9 @@ namespace positions
 
 	struct Position
 	{
-		int x{ Max_X/2 };
-		int y{ Max_Y/2 };
+		Position() = default;
+		Position(int x, int y) : x(x), y(y) {}
+		int x{};
+		int y{};
 	};
 }

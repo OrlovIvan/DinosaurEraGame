@@ -2,8 +2,9 @@
 #include <SFML/Graphics.hpp>
 #include <time.h>
 
-#include "Person.h"
-#include "Position.h"
+#include "../CoreMechanics/Person.h"
+#include "../CoreMechanics/Position.h"
+#include "SFMLParticles.h"
 
 using namespace sf;
 using namespace std;
@@ -194,20 +195,6 @@ void SFMLGraphicUnit::setCharacters(vector<Person*>& persons)
         characters.push_back(person);
 }
 
-struct Particle
-{
-    Particle(size_t coordX, size_t coordY, int speed_X, int speed_Y, size_t mass) :
-        x(coordX), y(coordY), speedX(speed_X), speedY(speed_Y), mass(mass) {}
-    size_t x;
-    size_t y;
-    int speedX;
-    int speedY;
-
-    size_t mass;
-};
-
-typedef vector<Particle> ParticlesVec;
-
 void particlesInit(ParticlesVec& paticles, sf::VertexArray& particlesImage, const int count)
 {
     const int particlePeneratorPositionX = 10;
@@ -273,24 +260,23 @@ void SFMLGraphicUnit::showMenu(sf::RenderWindow& window)
 {
     constexpr int landWidth = landWidthInTiles * tileSize + borderSize * 2;
     constexpr int landLength = landLengthInTiles * tileSize + borderSize * 2;
-    constexpr int landCenterX = landWidth / 2;
-    constexpr int landCenterY = landLength / 2;
+    const positions::Position landCenter(landWidth / 2, landLength / 2);
 
     Texture t2;
     t2.loadFromFile("images/bg.png");
     Sprite background(t2);
 
     sf::VertexArray button(sf::Quads, 4);
-    button[0].position = sf::Vector2f(landCenterX - 50, landCenterY - 20);
+    button[0].position = sf::Vector2f(landCenter.x - 50, landCenter.y - 20);
     button[0].color = sf::Color::Blue;
 
-    button[1].position = sf::Vector2f(landCenterX + 50, landCenterY - 20);
+    button[1].position = sf::Vector2f(landCenter.x + 50, landCenter.y - 20);
     button[1].color = sf::Color::Blue;
 
-    button[2].position = sf::Vector2f(landCenterX + 50, landCenterY + 20);
+    button[2].position = sf::Vector2f(landCenter.x + 50, landCenter.y + 20);
     button[2].color = sf::Color::Blue;
 
-    button[3].position = sf::Vector2f(landCenterX - 50, landCenterY + 20);
+    button[3].position = sf::Vector2f(landCenter.x - 50, landCenter.y + 20);
     button[3].color = sf::Color::Blue;
 
     sf::Text buttonText;
@@ -302,7 +288,7 @@ void SFMLGraphicUnit::showMenu(sf::RenderWindow& window)
     buttonText.setString("Play");
     buttonText.setCharacterSize(24);
     buttonText.setFillColor(sf::Color::Black);
-    buttonText.setPosition(landCenterX - 20, landCenterY - 15);
+    buttonText.setPosition(landCenter.x - 20, landCenter.y - 15);
     buttonText.setStyle(sf::Text::Bold);
 
     window.clear(Color::White);
@@ -360,7 +346,7 @@ void SFMLGraphicUnit::showMenu(sf::RenderWindow& window)
 void SFMLGraphicUnit::showMainWindow()
 {
     sf::RenderWindow window(VideoMode(landWidthInTiles * tileSize + borderSize * 2, landLengthInTiles * tileSize + borderSize * 2), "DinosaurEra");
-    showIntro(window);
+    //showIntro(window);
     showMenu(window);
 
     //Sprite s(t1), background(t2), frame(t3);
